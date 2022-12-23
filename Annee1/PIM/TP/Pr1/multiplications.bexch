@@ -1,0 +1,19 @@
+[GENERATED OBJECT FILE]
+b__multiplications.o
+[PROJECT FILES]
+/home/felix/Cours/Annee1/PIM/TP/Pr1/Projet1.gpr
+20221010025420 4511d1a0f6fe65f8e2dcc424206a3c56
+[BOUND OBJECT FILES]
+/home/felix/Cours/Annee1/PIM/TP/Pr1/multiplications.o
+[GENERATED SOURCE FILES]
+b__multiplications.ads
+b__multiplications.adb
+b__multiplications.ali
+[RESULTING OPTIONS]
+-L/home/felix/Cours/Annee1/PIM/TP/Pr1/
+-L/home/felix/Cours/Annee1/PIM/TP/Pr1/
+-L/home/felix/opt/GNAT/2021/lib/gcc/x86_64-pc-linux-gnu/10.3.1/adalib/
+-static
+-static-libgcc
+/home/felix/opt/GNAT/2021/lib/gcc/x86_64-pc-linux-gnu/10.3.1/adalib/libgnat.a
+-ldl

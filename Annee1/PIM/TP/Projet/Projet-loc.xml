@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<Locations >
+  <Project >
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>/home/felix/Cours/Annee1/PIM/TP/Projet/Projet.gpr</vfs_file>
+    </file_marker>
+    <file_marker column=" 67" line=" 3" >
+      <vfs_project />
+      <vfs_file>/home/felix/Cours/Annee1/PIM/TP/Projet/Projet.gpr</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/felix/Cours/Annee1/PIM/TP/Projet/Projet.gpr</vfs_project>
+      <vfs_file>/home/felix/Cours/Annee1/PIM/TP/Projet/ip.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 25" line=" 6" >
+      <vfs_project>/home/felix/Cours/Annee1/PIM/TP/Projet/Projet.gpr</vfs_project>
+      <vfs_file>/home/felix/Cours/Annee1/PIM/TP/Projet/ip.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/felix/Cours/Annee1/PIM/TP/Projet/Projet.gpr</vfs_project>
+      <vfs_file>/home/felix/Cours/Annee1/PIM/TP/Projet/routeur_simple.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 5" line=" 2" >
+      <vfs_project>/home/felix/Cours/Annee1/PIM/TP/Projet/Projet.gpr</vfs_project>
+      <vfs_file>/home/felix/Cours/Annee1/PIM/TP/Projet/routeur_simple.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/felix/Cours/Annee1/PIM/TP/Projet/Projet.gpr</vfs_project>
+      <vfs_file>/home/felix/Cours/Annee1/PIM/TP/Projet/plinkedlist.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/felix/Cours/Annee1/PIM/TP/Projet/Projet.gpr</vfs_project>
+      <vfs_file>/home/felix/Cours/Annee1/PIM/TP/Projet/ip.adb</vfs_file>
+    </file_marker>
+    <file_marker current="true" column=" 1" line=" 1" >
+      <vfs_project>/home/felix/Cours/Annee1/PIM/TP/Projet/Projet.gpr</vfs_project>
+      <vfs_file>/home/felix/Cours/Annee1/PIM/TP/Projet/plinkedlist.ads</vfs_file>
+    </file_marker>
+  </Project>
+</Locations>
