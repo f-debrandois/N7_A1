@@ -1,0 +1,136 @@
+V "GNAT Lib v2021"
+M P W=b
+A -gnatA
+A -gnatwa
+A -gnata
+A -g
+A -mtune=generic
+A -march=x86-64
+P SS ZX
+
+RN
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTION_PROPAGATION
+RV NO_EXCEPTIONS
+RV NO_IO
+RV NO_NESTED_FINALIZATION
+RV NO_DEFAULT_INITIALIZATION
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U routeur_simple%b	routeur_simple.adb	c8f54ac5 NE OO SU
+W ada%s			ada.ads			ada.ali
+Z ada.exceptions%s	a-except.adb		a-except.ali
+W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W cli%s			cli.adb			cli.ali
+W file_io%s		file_io.adb		file_io.ali
+W routage%s		routage.adb		routage.ali
+W routeur_exceptions%s	routeur_exceptions.ads	routeur_exceptions.ali
+W routeur_outils%s	routeur_outils.ads	routeur_outils.ali
+Z system.soft_links%s	s-soflin.adb		s-soflin.ali
+Z system.standard_library%s  s-stalib.adb	s-stalib.ali
+
+D ada.ads		20210520051130 76789da1 ada%s
+D a-charac.ads		20210520051127 2d3ec45b ada.characters%s
+D a-chlat1.ads		20210520051127 66457d31 ada.characters.latin_1%s
+D a-comlin.ads		20210520051127 4aa66568 ada.command_line%s
+D a-except.ads		20210520051127 946f3014 ada.exceptions%s
+D a-finali.ads		20210520051127 bf4f806b ada.finalization%s
+D a-inteio.ads		20210520051127 f64b89a4 ada.integer_text_io%s
+D a-ioexce.ads		20210520051127 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20210520051128 119b8fb3 ada.streams%s
+D a-string.ads		20210520051128 90ac6797 ada.strings%s
+D a-strmap.ads		20210520051128 5a88892a ada.strings.maps%s
+D a-sttebu.ads		20210520051128 18209c64 ada.strings.text_buffers%s
+D a-strunb.ads		20210520051128 03325227 ada.strings.unbounded%s
+D a-suteio.ads		20210520051129 26d8e9aa ada.strings.unbounded.text_io%s
+D a-stuten.ads		20210520051128 808c40ad ada.strings.utf_encoding%s
+D a-tags.ads		20210520051129 9eaa38c6 ada.tags%s
+D a-textio.ads		20210520051129 aef4d56d ada.text_io%s
+D a-tiinio.ads		20210520051129 390edddb ada.text_io.integer_io%s
+D a-tiunio.ads		20210520051129 759c6b0c ada.text_io.unbounded_io%s
+D a-unccon.ads		20210520051129 0e9b276f ada.unchecked_conversion%s
+D adresse_ip.ads	20230112140448 5206906b adresse_ip%s
+D cache.ads		20230112140624 6c92d9c4 cache%s
+D cli.ads		20230112140904 1ddb16bc cli%s
+D file_io.ads		20230112140935 a3deeb11 file_io%s
+D interfac.ads		20210520051131 edec285f interfaces%s
+D i-cstrea.ads		20210520051131 e53d8b8e interfaces.c_streams%s
+D routage.ads		20230112141001 ba5f1bbe routage%s
+D routeur_exceptions.ads  20230112141034 3fd9d682 routeur_exceptions%s
+D routeur_outils.ads	20230112141321 f169b134 routeur_outils%s
+D routeur_simple.adb	20230112141346 f97e7cb8 routeur_simple%b
+D system.ads		20210520051134 a2da961d system%s
+D s-atocou.ads		20210520051131 b45c2d8d system.atomic_counters%s
+D s-crtl.ads		20210520051131 0ebbdb71 system.crtl%s
+D s-exctab.ads		20210520051131 54135002 system.exception_table%s
+D s-ficobl.ads		20210520051131 078245e4 system.file_control_block%s
+D s-finmas.ads		20210520051131 1ab4dba8 system.finalization_masters%s
+D s-finroo.ads		20210520051131 4ff27390 system.finalization_root%s
+D s-memory.ads		20210520051132 597d6634 system.memory%s
+D s-parame.ads		20210520051133 4752c4cb system.parameters%s
+D s-pooglo.ads		20210520051133 ede33ef8 system.pool_global%s
+D s-putima.ads		20210520051133 4e095881 system.put_images%s
+D s-secsta.ads		20210520051133 9b3ab94b system.secondary_stack%s
+D s-soflin.ads		20210520051133 a7318a92 system.soft_links%s
+D s-stache.ads		20210520051133 a37c21ec system.stack_checking%s
+D s-stalib.ads		20210520051133 472fbca8 system.standard_library%s
+D s-stalib.adb		20210520051133 977290bf system.standard_library%b
+D s-stoele.ads		20210520051133 2dc34a04 system.storage_elements%s
+D s-stoele.adb		20210520051133 ed88f8fb system.storage_elements%b
+D s-stopoo.ads		20210520051133 e9fa2dd8 system.storage_pools%s
+D s-stratt.ads		20210520051133 7bdda3fa system.stream_attributes%s
+D s-traent.ads		20210520051133 26a8d361 system.traceback_entries%s
+D s-unstyp.ads		20210520051133 2b077493 system.unsigned_types%s
+D s-wchcon.ads		20210520051134 1b7d22d2 system.wch_con%s
+D unchconv.ads		20210520051134 ca2f9e18 unchecked_conversion%s
+G a e
+G c Z b b [routeur_simple standard 10 11 none]
+G r s valeur_entree [routeur_simple standard 10 11 none] [valeur_entreeIP routeur_outils 6 10 none]
+G r l valeur_entree [routeur_simple standard 10 11 none] [valeur_entreeDI routeur_outils 6 10 none]
+G r k valeur_entree [routeur_simple standard 10 11 none] [valeur_entreeDF routeur_outils 6 10 none]
+G r c none [routeur_simple standard 10 11 none] [initialiser cli 6 15 none]
+G r c none [routeur_simple standard 10 11 none] [remplir_table file_io 9 15 none]
+G r c none [routeur_simple standard 10 11 none] [traitement_simple file_io 11 15 none]
+G r c none [routeur_simple standard 10 11 none] [vider routage 40 19 none]
+X 1 ada.ads
+16K9*Ada 20e8 30|1r6 1r37 2r6 2r37
+X 7 a-inteio.ads
+18K13*Integer_Text_IO[18|46] 30|2w10 2r41
+X 17 a-textio.ads
+58K13*Text_IO 725e16 30|1w10 1r41
+506U14*Put_Line 30|23s39 24s51 25s50
+X 23 cli.ads
+5K9*CLI 7e8 30|5w6 5r15
+6U15*Initialiser 30|18s9
+6r27 Valeur_Initiale{29|6R10} 30|18r21
+X 24 file_io.ads
+7K9*File_IO 15e12 30|4w6 4r19 7w6 7r19
+9U15*Remplir_Table 30|19s9
+11U15*Traitement_Simple 30|20s9
+X 27 routage.ads
+9K9*Routage 60e12 30|3w6 3r19
+11P10*T_Table 30|11r11
+40U19*Vider 30|21s9
+X 28 routeur_exceptions.ads
+2K9*Routeur_Exceptions 6e23 30|8w6 8r30
+3X9*Invalid_CLI_Exception 30|23r14
+4X9*Invalid_Fichier_Routeur_Exception 30|24r14
+5X9*Invalid_Fichier_Paquet_Exception 30|25r14
+X 29 routeur_outils.ads
+5K9*Routeur_Outils 17e19 30|6w6 6r26
+6R10*Valeur_Entree 16e15 30|12r23
+X 30 routeur_simple.adb
+10U11*Routeur_Simple 10b11 27l5 27t19
+11p5 Tab{27|11P10} 19m40 19r40 20r44 21m15 21r15
+12r5 Valeur_Initiale{29|6R10} 18m40 18r40 19r23 20r27
+X 31 system.ads
+67M9*Address
+X 38 s-memory.ads
+53V13*Alloc{31|67M9} 103i<c,__gnat_malloc>22
+68U14*Free 104i<c,__gnat_free>22
+76V13*Realloc{31|67M9} 105i<c,__gnat_realloc>22
+X 46 s-stalib.adb
+89U14 Break_Start 90i<c,__gnat_break_start>22
+

@@ -1,0 +1,7 @@
+cli.adb:3:06: warning: redundant with clause in body [-gnatwr]
+cli.adb:3:33: warning: "Unbounded" is already use-visible through previous use_clause at cli.ads:1 [-gnatwr]
+cli.ads:5:52: error: "Valeur_Entree" is undefined
+cli.ads:9:21: error: "T_Politique" is undefined (more references follow)
+cli.ads:9:36: error: "FIFO" is undefined
+cli.ads:15:24: error: "T_Routeur" is undefined
+cli.ads:15:37: error: "simple" is undefined

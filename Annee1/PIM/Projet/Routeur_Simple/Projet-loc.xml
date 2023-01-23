@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<Locations >
+  <Project >
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/routeur_simple.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 11" line=" 3" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/routeur_simple.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/ip.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 14" line=" 6" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/ip.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/plinkedlist.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/plinkedlist.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/routeur_simple.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/plinkedlist.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/ip.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/ip.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/plinkedlist.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/plinkedlist.ads</vfs_file>
+    </file_marker>
+    <file_marker current="true" column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/routeur_simple.adb</vfs_file>
+    </file_marker>
+  </Project>
+</Locations>

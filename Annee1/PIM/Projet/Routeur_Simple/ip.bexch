@@ -1,0 +1,23 @@
+[MAPPING FILE]
+/tmp/GNAT-TEMP-000005.TMP
+[TOOLCHAIN VERSION]
+ada
+GNAT 2021
+[MAIN BASE NAME]
+ip
+[COMPILER PATH]
+/mnt/n7fs/ens/tp_cregut/GNAT/2021/bin/gcc
+[COMPILER LEADING SWITCHES]
+-c
+-x
+ada
+-gnatA
+[MAIN DEPENDENCY FILE]
+/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/ip.ali
+[DEPENDENCY FILES]
+[BINDING OPTIONS]
+gnatbind_prefix=
+-E
+[PROJECT FILES]
+/home/ffoucher/Annee1/PIM/Projet/Routeur_Simple/Projet.gpr
+20221215070014 d258c706908945e0fc99908e232bc34f

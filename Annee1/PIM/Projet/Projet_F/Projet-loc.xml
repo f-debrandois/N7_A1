@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<Locations >
+  <Project>
+    <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_file>
+    <file_marker column=" 1" line=" 35" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 24" line=" 30" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cli.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 3" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cli.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/file_io.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/file_io.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 35" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/routeur.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 4" line=" 3" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/routeur_simple.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 4" line=" 3" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/routeur_simple.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 4" line=" 3" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/routeur_ll.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 4" line=" 3" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/routeur_ll.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 4" line=" 3" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/routeur_la.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 4" line=" 3" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/routeur_la.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 4" line=" 3" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cache_ll.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 4" line=" 3" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cache_ll.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 4" line=" 3" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cache_la.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 4" line=" 3" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cache_la.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 16" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/file_io.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cache_la.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 35" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cli.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cli.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 157" line=" 29" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/routeur_exceptions.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 15" line=" 4" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 68" line=" 26" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/file_io.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/routeur.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 68" line=" 26" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/file_io.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/routeur.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/routeur.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 17" line=" 14" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cli.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 6" line=" 3" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cli.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 15" line=" 15" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cli.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 6" line=" 3" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cli.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 58" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cli.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 58" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cli.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 2" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cli.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/routeur_outils.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 41" line=" 5" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 6" line=" 4" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 27" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/file_io.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 6" line=" 13" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/file_io.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 86" line=" 59" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cli.adb</vfs_file>
+    </file_marker>
+    <file_marker current="true" column=" 6" line=" 3" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/Projet/Projet_F/Projet.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/Projet/Projet_F/cli.adb</vfs_file>
+    </file_marker>
+  </Project>
+</Locations>

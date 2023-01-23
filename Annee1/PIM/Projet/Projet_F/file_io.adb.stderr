@@ -1,0 +1,13 @@
+file_io.adb:13:06: error: file "cache_fifo.ads" not found
+file_io.adb:14:06: error: file "cache_lfu.ads" not found
+file_io.adb:15:06: error: file "cache_lru.ads" not found
+file_io.ads:1:06: error: file "adresse_ip.ads" not found
+file_io.ads:1:06: error: "File_Io (body)" depends on "File_Io (spec)"
+file_io.ads:1:06: error: "File_Io (spec)" depends on "Adresse_Ip (spec)"
+file_io.ads:3:06: error: file "cache.ads" not found
+file_io.ads:3:06: error: "File_Io (body)" depends on "File_Io (spec)"
+file_io.ads:3:06: error: "File_Io (spec)" depends on "Routeur_Outils (spec)"
+file_io.ads:3:06: error: "Routeur_Outils (spec)" depends on "Cache (spec)"
+file_io.ads:4:06: error: file "routage.ads" not found
+file_io.ads:4:06: error: "File_Io (body)" depends on "File_Io (spec)"
+file_io.ads:4:06: error: "File_Io (spec)" depends on "Routage (spec)"

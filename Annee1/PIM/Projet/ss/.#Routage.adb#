@@ -1,0 +1,106 @@
+with Ada.Unchecked_Deallocation;
+with Adresse_IP; use Adresse_IP;
+with Ada.Strings.Unbounded;     use Ada.Strings.Unbounded;
+
+package body Routage is
+
+	procedure Free is
+            new Ada.Unchecked_Deallocation (Object => T_Cellule, Name => T_Table);
+
+	procedure Initialiser(Tab: out T_Table) is
+	begin
+        Tab:=Null;
+	end Initialiser;
+
+	function Est_Vide (Tab : T_Table) return Boolean is
+	begin
+       return Tab = Null;
+	end Est_Vide;
+
+	function Taille (Tab : in T_Table) return Integer is
+	begin
+        -- Fonction récursive
+        if Tab = Null then
+            return 0;
+        else
+            return 1 + Taille (Tab.all.Suivant);
+        end if;
+	end Taille;
+
+    procedure Enregistrer (Tab : in out T_Table ; Destination : in T_IP ; Masque : in T_IP; Interf : in Unbounded_String) is
+    begin
+         if Tab = Null then
+            Tab:= new T_Cellule'(Destination, Masque, Interf, Tab);
+	    else
+	        Enregistrer(Tab.all.Suivant, Destination, Masque, Interf);
+	    end if;
+	end Enregistrer;
+
+    function L_Interface (Tab : in T_Table ; IP_Paquet : in T_IP) return Unbounded_String is
+        Noeud : T_Table;
+        Interf : Unbounded_String;
+        Max : T_IP;
+    begin
+        Max:=0;
+        Noeud := Tab;
+        while Noeud /= Null loop
+            if (IP_Paquet and Noeud.all.Masque) = Noeud.all.Destination then
+                if Noeud.all.Masque > Max then
+                    Max := noeud.all.Masque;
+                    Interf := Noeud.all.Interf;
+                end if;
+            end if;
+            Noeud := Noeud.all.Suivant;
+        end loop;
+        return Interf;
+    end L_Interface;
+
+    -- retourne le plus long masque de la table
+    -- Idee :
+    -- indice1, indice2 : Integer; elem1,elem2 :Unbounded String;
+    -- indice1 := index(Addresse_IP_String, ".", 1);
+    -- elem1 := Unbounded_Slice(Addresse_IP_String, 1, indice1-1);
+    -- indice2 := index(Addresse_IP_String, ".", 1);
+    -- elem2 := Unbounded_Slice(Addresse_IP_String, 1, indice2-1);
+    -- if elem1 = elem2 then
+    --
+
+
+
+    function Long_Masque (Tab : in T_Table ; IP_Paquet : in T_IP) return T_IP is
+        Noeud : T_Table;
+        Max : T_IP;
+    begin
+        Max := 0;
+        Noeud := Tab;
+        while Noeud /= Null loop
+            if Noeud.all.Masque > Max then
+                Max := Noeud.all.Masque;
+            end if;
+            Noeud := Noeud.all.Suivant;
+        end loop;
+        return Max;
+    end Long_Masque;
+
+	procedure Vider (Tab : in out T_Table) is
+	begin
+        if Tab /= Null then
+		    Vider(Tab.all.Suivant);
+            Free(Tab);
+        end if;
+	end Vider;
+
+    procedure Pour_Chaque (Tab : in T_Table) is
+        Noeud: T_Table;
+	begin
+        Noeud := Tab;
+        while Noeud /= Null loop
+            begin
+                Traiter(Noeud.all.Destination, Noeud.all.Masque, Noeud.all.Interf);
+            exception
+                when others => null;
+            end;
+			Noeud := Noeud.all.Suivant;
+	   end loop;
+    end Pour_Chaque;
+end Routage;

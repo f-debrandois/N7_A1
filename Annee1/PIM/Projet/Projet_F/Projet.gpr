@@ -1,0 +1,18 @@
+project Projet is
+
+   for Main use ("adresse_ip.adb", "cache.adb", "cache_fifo.adb", "cache_lfu.adb", "cache_lru.adb", "cli.adb", "file_io.adb", "routage.adb", "routeur_la.adb", "routeur_ll.adb", "routeur_simple.adb");
+
+   package Builder is
+      for Default_Switches ("ada") use ("-s");
+   end Builder;
+
+   package Compiler is
+      for Default_Switches ("ada") use ("-gnatwa", "-gnata", "-g");
+   end Compiler;
+
+   package Binder is
+      for Default_Switches ("ada") use ("-E");
+   end Binder;
+
+end Projet;
+

@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<Locations>
+  <Project>
+    <vfs_file>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_file>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 78" line=" 35" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca_sujet.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca_sujet.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 10" line=" 4" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca_sujet.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 10" line=" 7" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 19" line=" 60" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/sda_exceptions.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 5" line=" 381" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/evaluer_alea_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 6" line=" 4" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/evaluer_alea_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 5" line=" 380" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 73" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 5" line=" 380" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 19" line=" 101" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 38" line=" 381" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 28" line=" 38" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 38" line=" 381" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 19" line=" 101" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 28" line=" 38" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 19" line=" 7" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 19" line=" 101" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/evaluer_alea_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 19" line=" 101" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/exemple_alea.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 5" line=" 371" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 17" line=" 257" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 35" line=" 280" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 17" line=" 257" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 35" line=" 280" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/evaluer_alea_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 6" line=" 4" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/evaluer_alea_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 5" line=" 372" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 17" line=" 257" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 19" line=" 7" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 17" line=" 257" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 19" line=" 70" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 32" line=" 98" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 17" line=" 257" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 24" line=" 93" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 95" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 16" line=" 94" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 32" line=" 98" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 17" line=" 257" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 261" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 17" line=" 257" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 32" line=" 98" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 17" line=" 257" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/test_lca.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 63" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca_sujet.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 4" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca_sujet.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 49" line=" 3" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca_sujet.adb</vfs_file>
+    </file_marker>
+    <file_marker current="true" column=" 35" line=" 9" >
+      <vfs_project>/home/ffoucher/Annee1/PIM/PR02/tp10.gpr</vfs_project>
+      <vfs_file>/home/ffoucher/Annee1/PIM/PR02/lca_sujet.adb</vfs_file>
+    </file_marker>
+  </Project>
+</Locations>

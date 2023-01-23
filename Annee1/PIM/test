@@ -1,0 +1,13 @@
+        
+        
+        
+        P := Sda;
+        while P.all.Suivant /= null and P.all.Cle /= Cle loop
+            P := P.all.Suivant;
+        end loop;
+        
+        if P.all.Suivant = null then
+            P := new T_Cellule'(Cle, Donnee, null);
+        else
+            P.all.Donnee = Donnee;
+        end if;
