@@ -101,3 +101,5 @@ taux_erreur = bits_differents/N_bits
 % Modifier les valeurs et observer
 
 % 6. Démodulateur de fréquence adapté à la norme V21
+
+% On teste
