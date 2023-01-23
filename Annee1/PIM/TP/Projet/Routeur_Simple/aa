@@ -1,0 +1,25 @@
+ if Ligne = "table" then
+                    Put_Line(Ligne &"(ligne"& Numero_Ligne'Image & ")");
+                    AfficherRouteur(Tab);
+                    New_Line;
+                elsif Ligne = "cache" then
+                    Put_Line(Ligne & "(ligne"& Numero_Ligne'Image & ")");
+                    Put_Line("La taille du cache est 0. Il s'agit d'un routeur simple!");
+                    New_Line;
+                elsif Ligne = "stat" then
+                    Put_Line(Ligne & "(ligne"& Numero_Ligne'Image & ")");
+                    Put_Line("La taille du cache est 0. Il s'agit d'un routeur simple!");
+                    New_Line;
+                elsif Ligne = "fin" then
+                    Put_Line(Ligne &"(ligne"& Numero_Ligne'Image & ")");
+                    New_Line;
+                    exit;
+                else
+                    IP_Paquet := To_Ip(Ligne);
+                    Interf := L_Interface(Tab, To_Ip(Ligne));
+                    Put (Sortie_File, Conversion_String(IP_Paquet) & " " & Interf);     --Écrire l'adresse paquet et son interface correspondante sur 2 postions sur le fichier Sortie
+                    New_Line (Sortie_File);
+                    
+                    
+                    exception
+            when others => raise Invalid_Fichier_Paquet_Exception;

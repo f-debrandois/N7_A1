@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<Locations >
+  <Project>
+    <vfs_file>/home/felix/Cours/Annee1/PIM/TP/Projet/ss/Routeur_ss.gpr</vfs_file>
+    <file_marker column=" 4" line=" 3" >
+      <vfs_project>/home/felix/Cours/Annee1/PIM/TP/Projet/ss/Routeur_ss.gpr</vfs_project>
+      <vfs_file>/home/felix/Cours/Annee1/PIM/TP/Projet/ss/aaa.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 4" line=" 3" >
+      <vfs_project>/home/felix/Cours/Annee1/PIM/TP/Projet/ss/Routeur_ss.gpr</vfs_project>
+      <vfs_file>/home/felix/Cours/Annee1/PIM/TP/Projet/ss/xwc.ads</vfs_file>
+    </file_marker>
+    <file_marker current="true" column=" 1" line=" 1" >
+      <vfs_project>/home/felix/Cours/Annee1/PIM/TP/Projet/ss/Routeur_ss.gpr</vfs_project>
+      <vfs_file>/home/felix/Cours/Annee1/PIM/TP/Projet/ss/aaa.adb</vfs_file>
+    </file_marker>
+  </Project>
+  <Project >
+    <vfs_file >/home/felix/T#195;#169;l#195;#169;chargements/ss/Routeur_ss.gpr</vfs_file>
+    <file_marker column=" 1" line=" 1">
+      <vfs_project  />
+      <vfs_file >/home/felix/T#195;#169;l#195;#169;chargements/ss/Routeur_ss.gpr</vfs_file>
+    </file_marker>
+    <file_marker column=" 12" line=" 5">
+      <vfs_project  />
+      <vfs_file >/home/felix/T#195;#169;l#195;#169;chargements/ss/Routeur_ss.gpr</vfs_file>
+    </file_marker>
+    <file_marker column=" 12" line=" 9">
+      <vfs_project  />
+      <vfs_file >/home/felix/T#195;#169;l#195;#169;chargements/ss/Routeur_ss.gpr</vfs_file>
+    </file_marker>
+    <file_marker column=" 20" line=" 3">
+      <vfs_project  />
+      <vfs_file >/home/felix/T#195;#169;l#195;#169;chargements/ss/Routeur_ss.gpr</vfs_file>
+    </file_marker>
+    <file_marker current="true" column=" 1" line=" 1">
+      <vfs_project  />
+      <vfs_file >/home/felix/T#195;#169;l#195;#169;chargements/ss/Adresse_IP.adb</vfs_file>
+    </file_marker>
+  </Project>
+</Locations>
