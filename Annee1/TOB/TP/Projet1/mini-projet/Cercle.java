@@ -28,8 +28,8 @@ public class Cercle {
 	 * @param p2 point 2
 	 */
 	public Cercle(Point p1, Point p2) {
-		this.centre = c;
-		this.rayon = r;
+		this.rayon = p1.distance(p2)/2;
+		this.centre = new Point((p1.getX() + p2.getX())/2, (p1.getY() + p2.getY())/2);
 		this.couleur = Color.blue;
 	}
 
@@ -40,8 +40,8 @@ public class Cercle {
 	 * @param p2 point 2
 	 */
     public static Cercle creerCercle(Point p1, Point p2) {
-        this.centre = c;
-		this.rayon = r;
+		this.centre = p1;
+		this.rayon = p1.distance(p2);
 		this.couleur = Color.blue;
     }
 
@@ -100,28 +100,25 @@ public class Cercle {
 	* @param couleur couleur voulue pour le cercle
 	*/
 	public void setCouleur(Color couleur) {
-		this.x += dx;
-		this.y += dy;
+		this.couleur = couleur;
 	}
 
 	/** Afficher le cercle. */
 	public void afficher() {
-		System.out.print(this);
+		System.out.print("C" + Double.toString(this.rayon) + "@" + this.centre.toString());
 	}
 
     /** Changer le rayon d'un cercle.
 	* @param r rayon voulu pour le cercle
 	*/
-	public void setRayon(Color couleur) {
-		this.x += dx;
-		this.y += dy;
+	public void setRayon(double r) {
+		this.rayon = r;
 	}
 
     /** Changer le diamètre d'un cercle.
 	* @param d diamètre voulu pour le cercle
 	*/
-	public void setDiametre(Color couleur) {
-		this.x += dx;
-		this.y += dy;
+	public void setDiametre(double d) {
+		this.rayon = d/2;
 	}
 }
