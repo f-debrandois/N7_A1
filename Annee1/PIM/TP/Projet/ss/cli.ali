@@ -1,0 +1,160 @@
+V "GNAT Lib v10"
+P SS ZX
+
+RN
+RV NO_ENUMERATION_MAPS
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTIONS
+RV NO_IO
+RV NO_SECONDARY_STACK
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV SPARK_05
+
+U cli%b			cli.adb			a41fae6d NE OO PK IU
+W ada%s			ada.ads			ada.ali
+W ada.command_line%s	a-comlin.adb		a-comlin.ali
+Z ada.exceptions%s	a-except.adb		a-except.ali
+W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
+W ada.strings%s		a-string.ads		a-string.ali
+W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
+Z ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W ada.text_io.unbounded_io%s  a-tiunio.ads	a-tiunio.ali
+W adresse_ip%s		adresse_ip.adb		adresse_ip.ali
+W cache%s		cache.adb		cache.ali
+W cache_fifo%s		cache_fifo.adb		cache_fifo.ali
+W cache_lfu%s		cache_lfu.adb		cache_lfu.ali
+W cache_lru%s		cache_lru.adb		cache_lru.ali
+W routeur_exceptions%s	routeur_exceptions.ads	routeur_exceptions.ali
+W routeur_outils%s	routeur_outils.ads	routeur_outils.ali
+Z system%s		system.ads		system.ali
+Z system.concat_2%s	s-conca2.adb		s-conca2.ali
+Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+Z system.soft_links%s	s-soflin.adb		s-soflin.ali
+Z system.standard_library%s  s-stalib.adb	s-stalib.ali
+Z system.val_enum%s	s-valenu.adb		s-valenu.ali
+Z system.val_int%s	s-valint.adb		s-valint.ali
+
+U cli%s			cli.ads			a8e247b8 EE NE OO PK IU
+W ada%s			ada.ads			ada.ali
+W ada.strings%s		a-string.ads		a-string.ali
+W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
+W adresse_ip%s		adresse_ip.adb		adresse_ip.ali
+W routeur_outils%s	routeur_outils.ads	routeur_outils.ali
+
+D ada.ads		20220628085427 76789da1 ada%s
+D a-charac.ads		20220628085427 2d3ec45b ada.characters%s
+D a-chlat1.ads		20220628085427 66457d31 ada.characters.latin_1%s
+D a-comlin.ads		20220628085427 4aa66568 ada.command_line%s
+D a-except.ads		20220628085427 a7106115 ada.exceptions%s
+D a-finali.ads		20220628085427 bf4f806b ada.finalization%s
+D a-inteio.ads		20220628085427 f64b89a4 ada.integer_text_io%s
+D a-ioexce.ads		20220628085427 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20220628085427 119b8fb3 ada.streams%s
+D a-string.ads		20220628085427 90ac6797 ada.strings%s
+D a-strmap.ads		20220628085427 e8bb714a ada.strings.maps%s
+D a-strunb.ads		20220628085427 1656705b ada.strings.unbounded%s
+D a-suteio.ads		20220628085427 26d8e9aa ada.strings.unbounded.text_io%s
+D a-tags.ads		20220628085427 491b781d ada.tags%s
+D a-textio.ads		20220628085427 aef4d56d ada.text_io%s
+D a-tiinio.ads		20220628085427 390edddb ada.text_io.integer_io%s
+D a-tiunio.ads		20220628085427 759c6b0c ada.text_io.unbounded_io%s
+D a-unccon.ads		20220628085427 0e9b276f ada.unchecked_conversion%s
+D adresse_ip.ads	20230108124446 5206906b adresse_ip%s
+D cache.ads		20230108125227 6c92d9c4 cache%s
+D cache_fifo.ads	20230108131543 ccf1a124 cache_fifo%s
+D cache_lfu.ads		20230108132956 78acb50b cache_lfu%s
+D cache_lru.ads		20230108131332 4908f198 cache_lru%s
+D cli.ads		20230109114436 1ddb16bc cli%s
+D cli.adb		20230109115210 c5665189 cli%b
+D interfac.ads		20220628085427 5ab55268 interfaces%s
+D i-cstrea.ads		20220628085427 e53d8b8e interfaces.c_streams%s
+D routeur_exceptions.ads  20230109115005 3fd9d682 routeur_exceptions%s
+D routeur_outils.ads	20230108182217 f169b134 routeur_outils%s
+D system.ads		20220628085427 4635ec04 system%s
+D s-atocou.ads		20220628085427 b45c2d8d system.atomic_counters%s
+D s-conca2.ads		20220628085427 02a0d7d0 system.concat_2%s
+D s-crtl.ads		20220628085427 0ebbdb71 system.crtl%s
+D s-exctab.ads		20220628085427 54135002 system.exception_table%s
+D s-ficobl.ads		20220628085427 078245e4 system.file_control_block%s
+D s-finmas.ads		20220628085427 7811a767 system.finalization_masters%s
+D s-finroo.ads		20220628085427 4ff27390 system.finalization_root%s
+D s-memory.ads		20220628085427 597d6634 system.memory%s
+D s-parame.ads		20220628085427 48ec542b system.parameters%s
+D s-pooglo.ads		20220628085427 ede33ef8 system.pool_global%s
+D s-secsta.ads		20220628085427 20bbe636 system.secondary_stack%s
+D s-soflin.ads		20220628085427 a7318a92 system.soft_links%s
+D s-stache.ads		20220628085427 a37c21ec system.stack_checking%s
+D s-stalib.ads		20220628085427 09bd3940 system.standard_library%s
+D s-stalib.adb		20220628085427 f2fe2716 system.standard_library%b
+D s-stoele.ads		20220628085427 2dc34a04 system.storage_elements%s
+D s-stopoo.ads		20220628085427 b16154c2 system.storage_pools%s
+D s-stposu.ads		20220628085427 97a6219c system.storage_pools.subpools%s
+D s-stratt.ads		20220628085427 aedef97e system.stream_attributes%s
+D s-traent.ads		20220628085427 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20220628085427 34867c83 system.unsigned_types%s
+D s-valenu.ads		20220628085427 6201ebfb system.val_enum%s
+D s-valint.ads		20220628085427 b5ff6963 system.val_int%s
+D s-wchcon.ads		20220628085427 1b7d22d2 system.wch_con%s
+G a e
+G c Z s b [initialiser cli 6 15 none]
+X 1 ada.ads
+16K9*Ada 20e8 24|2r6 2r37 25|5r6 5r37 6r6 6r37 7r6 7r37 8r6 8r37 9r6 9r37
+X 4 a-comlin.ads
+36K13*Command_Line 144e21 25|9w10 9r41
+39V13*Argument_Count{natural} 25|19s16
+52V13*Argument{string} 25|20s14 22s59 23s54 26s74 27s64 38s67 41s67 44s67
+X 7 a-inteio.ads
+18K13*Integer_Text_IO[16|46] 25|6w10 6r41
+X 10 a-string.ads
+16K13*Strings 35e16 24|2r10 2r41 25|7r10 7r41
+X 12 a-strunb.ads
+82K21*Unbounded 756e26 24|2w18 2r49 25|7w18 7r49
+103V13*To_Unbounded_String{87R9} 25|38s47 41s47 44s47
+X 15 a-textio.ads
+57K13*Text_IO 727e16 25|5w10 5r41 8r10 8r41
+508U14*Put_Line 25|23s17 26s17 30s17 34s17
+X 17 a-tiunio.ads
+25K21*Unbounded_IO 61e29 25|8w18 8r49
+X 19 adresse_ip.ads
+10K9*Adresse_IP 18e15 24|1w6 1r22 25|1w6 1r22
+X 20 cache.ads
+4K9*Cache 39e10 25|11w6 11r17
+6E10*T_Politique 6e41 25|27r46
+X 21 cache_fifo.ads
+6K9*Cache_FIFO 45e15 25|2w6
+X 22 cache_lfu.ads
+7K9*Cache_LFU 47e14 25|3w6
+X 23 cache_lru.ads
+7K9*Cache_LRU 46e14 25|4w6
+X 24 cli.ads
+5K9*CLI 7l5 7e8 25|14b14 51l5 51t8
+6U15*Initialiser 6=27 25|16b15 50l9 50t20
+6r27 Valeur_Initiale{29|6R10} 25|16b27 22m17 27m17 31m17 35m17 38m17 41m17
+. 44m17
+X 25 cli.adb
+17i9 i{integer} 19r11 20r23 22r68 23r63 24m17 24r22 26r83 27r73 28m17 28r22
+. 32m17 32r21 36m17 36r21 38r76 39m17 39r22 41r76 42m21 42r24 44r76 45m17
+. 45r20
+X 28 routeur_exceptions.ads
+2K9*Routeur_Exceptions 25|12w6 12r30 28|6e23
+3X9*Invalid_CLI_Exception 25|47r23
+X 29 routeur_outils.ads
+5K9*Routeur_Outils 24|3w6 3r26 25|10w6 10r26 29|17e19
+6R10*Valeur_Entree 24|6r52 25|16r52 29|16e15
+8e9*Politique{20|6E10} 25|27m33
+9r9*Nom_Paquet{12|87R9} 25|38m33
+10r9*Nom_Entree{12|87R9} 25|41m33
+11r9*Nom_Sortie{12|87R9} 25|44m33
+12i9*Capacite{integer} 25|22m33
+13b9*Afficher_Stats_Active{boolean} 25|31m33 35m33
+X 30 system.ads
+67M9*Address
+X 38 s-memory.ads
+53V13*Alloc{30|67M9} 103i<c,__gnat_malloc>22
+68U14*Free 104i<c,__gnat_free>22
+76V13*Realloc{30|67M9} 105i<c,__gnat_realloc>22
+X 45 s-stalib.adb
+93U14 Break_Start 94i<c,__gnat_break_start>22
+
