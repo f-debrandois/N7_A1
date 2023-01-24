@@ -12,7 +12,7 @@ public class Point {
 	 * @param vy ordonnée
 	 */
 	public Point(double vx, double vy) {
-		// System.out.println("CONSTRUCTEUR Point(" + vx + ", " + vy + ")");
+		System.out.println("CONSTRUCTEUR Point(" + vx + ", " + vy + ")");
 		this.x = vx;
 		this.y = vy;
 		this.couleur = Color.green;
@@ -85,7 +85,7 @@ public class Point {
 		this.couleur = nouvelleCouleur;
 	}
 
-/*
+
 	// La méthode finalize est appelée avant que le récupérateur de
 	// mémoire ne détruise l'objet.  Attention toutefois, on ne sait
 	// pas quand ces ressources seront libérées et il est donc
@@ -102,7 +102,7 @@ public class Point {
 		this.afficher();
 		System.out.println();
 	}
-*/
+
 
 //	Représentation interne d'un point
 //	---------------------------------
