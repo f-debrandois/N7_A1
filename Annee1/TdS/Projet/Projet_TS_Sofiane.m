@@ -86,11 +86,11 @@ signal_filtre_paquet = reshape(y_bas,Ns,N_bits);
 energie = sum(signal_filtre_paquet.^2);
 K = (max(energie) + min(energie))/2;
 signal_demodule = energie > K;
-figure(6)
-plot(1:N_bits,signal_demodule)
-title("Signal démodulé après filtrage passe-bas")
-xlabel("Temps (t)")
-ylabel("y(t)")
+% figure(6)
+% plot(1:N_bits,signal_demodule)
+% title("Signal démodulé après filtrage passe-bas")
+% xlabel("Temps (t)")
+% ylabel("y(t)")
 
 % Taux d'erreur binaire
 bits_differents = sum(suite_bits~=signal_demodule);

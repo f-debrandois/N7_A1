@@ -14,14 +14,17 @@ Ns = Fe/D; % Nombre d'échantillons par bits
 Ts = Ns/Fe; % Période par bits
 Fs = 1/Ts; %% Fréquence des bits
 
-% Fc = 1080; % Fréquence de coupure
-% delta_f = 100;
-% F0 = Fc + delta_f;
-% F1 = Fc - delta_f;
+Fc = 1080; % Fréquence de coupure
+delta_f = 100;
+F0 = Fc + delta_f;
+F1 = Fc - delta_f;
 
-F0 = 6000;
-F1 = 2000;
-Fc = (F0 + F1)/2;
+% F0 = 6000;
+% F1 = 2000;
+% Fc = (F0 + F1)/2;
+
+Fc_norm = Fc/Fe;
+ordre = 201;
 
 %% 3. Modem de fréquence
 % 3.1 Génération du signal NRZ
@@ -100,7 +103,7 @@ P_x = mean(abs(x).^2);
 
 SNR_dB = 50;
 P_y = P_x*10.^(-SNR_dB/10);
-bruit = sqrt(P_y) * randn(1, size(x, 1))';
+bruit = sqrt(P_y) * randn(1, length(x));
 x_perturbe = x + bruit;
 nexttile
 plot(T, x_perturbe);
@@ -108,24 +111,13 @@ xlabel("temps (s)")
 ylabel("Signal perturbé")
 title("SNR_d_B = " + SNR_dB)
 
-
-% for i = [1; 2; 10; 20; 50; 100]
-%     SNR_dB = i
-%     P_y = P_x*10.^(-SNR_dB/10);
-%     bruit = sqrt(P_y) * randn(1, size(x, 1))';
-%     x_perturbe = x + bruit;
-% 
-%     nexttile
-%     plot(T, x_bruit);
-%     xlabel("temps (s)")
-%     ylabel("Signal perturbé")
-%     title("SNR_d_B = " + SNR_dB)
-% end
+SNR_tab = [1; 2; 10; 20; 50; 100];
+P_y_tab = P_x*10.^(-SNR_tab/10);
+bruit_tab = sqrt(P_y_tab) * randn(1, length(x));
+x_perturbe_tab = x + bruit_tab;
 
 
 %% 5. Démodulation par filtrage
-Fc_norm = Fc/Fe;
-ordre = 61;
 
 % Filtre passe-bas
 figure('name', 'Filtre passe-bas')
@@ -231,52 +223,108 @@ title("Densité spectrale de puissance du signal en sortie du passe-haut")
 
 % 5.5 Détection d'énergie
 % 1 Calcul d'energie
-figure('name', 'signal de sortie')
+figure('name', 'Signal de sortie')
 Ypb = reshape(Xpb,Ns,n_bits);
 energie = sum(Ypb.^2);
-K = 5; % Trouvé expérimentalement
-bits_restitues = energie > 5;
+K = 10; % Trouvé expérimentalement
+bits_restitues = energie > K;
 NRZ_sortie = repelem(bits_restitues, Ns)';
 nexttile
 plot(T, NRZ);
+xlabel("temps (s)")
+ylabel("NRZ(t) en entrée")
+title("NRZ en entrée")
 nexttile
 plot(T, NRZ_sortie);
-xlabel("temps")
+xlabel("temps (s)")
 ylabel("NRZ(t) en sortie")
-title("NRZ en sortie (Démodulation par filtrage)")
+title("NRZ en sortie")
 
 
 % 2 Erreur binaire
-erreur = sum(bits_restitues ~= bits);
+erreur = sum(bits_restitues' ~= bits);
 taux = erreur/n_bits ; % le taux d'erreur
+
+% Evolution de l'erreur binaire en fonction du rapport signal sur bruit
+taux = zeros(1, length(SNR_tab));
+for i = 1:length(SNR_tab)
+    Xpb_d = filter(h_pb, 1, [x_perturbe_tab(i, :), zeros(1, floor(ordre/2) - 1)]);
+    Xpb = Xpb_d(floor(ordre/2):end);
+
+    Ypb = reshape(Xpb,Ns,n_bits);
+    energie = sum(Ypb.^2, 1);
+    bits_restitues = energie > K;
+    erreur = sum(bits_restitues' ~= bits);
+    taux(i) = erreur/n_bits;
+end
+
+nexttile
+semilogx(SNR_tab, taux);
+xlabel("SNR")
+ylabel("Taux d'erreur binaire")
+title("TEB en fonction du rapport signal / bruit")
+
+
+% 5.6 Modification du démodulateur
+% 1 Ordre = 201
+
+% On trouve les mêmes résultats
+
 
 
 % 6.1 Contexte de synchronisation ideale
+figure('name', 'Modem V21')
 % 1 Principe de fonctionnement du récepteur
-signal_0 = x . cos(2*pi*F0*t + phi0);
-signal_1 = x.  cos(2*pi*F1*t + phi1);
-valeur_0 = integrer_signal(signal_0,Ts);
-valeur_1 = integrer_signal(signal_1,Ts);
-resultat = valeur_1 - valeur_0 ;
-% La synchronisation idéale suivant la recommandation V21
 
 
 % 2 Implementation du demodulateur
 
+bits_restitues = modem_V21(x_perturbe, phi0, phi1);
+
+NRZ_sortie = repelem(bits_restitues, Ns)';
+nexttile
+plot(T, NRZ);
+xlabel("temps (s)")
+ylabel("NRZ(t) en entrée")
+title("NRZ en entrée")
+nexttile
+plot(T, NRZ_sortie);
+xlabel("temps (s)")
+ylabel("NRZ(t) en sortie")
+title("NRZ en sortie")
+
+erreur = sum(bits_restitues' ~= bits);
+taux = erreur/n_bits ; % le taux d'erreur
 
 
 % 6.2 Gestion d'une erreur de synchronisation de phase porteuse
 % 1 Introduction de l'erreur de phase porteuse
+phi2 = rand*2*pi;
+phi3 = rand*2*pi;
+bits_non_synch = modem_V21(x_perturbe, phi2, phi3);
 
+taux_non_synch = sum(bits_non_synch' ~= bits)/n_bits
+
+% Si la différence de phase entre le modulateur V21 et le démodulateur est
+% non nulle, alors les intégrales perdent leur propriété de négligeabilité
 
 
 % 2 Gestion d'une erreur de phase porteuse
 
 
 
-
-
-
+function bits_res_GE = Demodulateur_FSK_GE(x, t, F0, F1, Ns)
+        x_reshaped = reshape(x, Ns, length(x)/Ns);
+        t_reshaped = reshape(t, Ns, length(x)/Ns);
+        x0_cos = x_reshaped .* cos(2*pi*F0*t_reshaped);
+        x0_sin = x_reshaped .* sin(2*pi*F0*t_reshaped);
+        x1_cos = x_reshaped .* cos(2*pi*F1*t_reshaped);
+        x1_sin = x_reshaped .* sin(2*pi*F1*t_reshaped);
+        x0 = sum(x0_cos).^2 + sum(x0_sin).^2;
+        x1 = sum(x1_cos).^2 + sum(x1_sin).^2;
+        H = x0 - x1;
+        bits_res_GE = H<0;
+end    
 
 
 function [S_NRZ] = Signal_S_NRZ(f, t)
