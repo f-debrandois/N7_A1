@@ -2,7 +2,7 @@
 %Felix Foucher
 %Achraf Marzougui
 
-function [bits_restitues] = modem_V21(signal, phi0, phi1)
+function [bits_restitues] = modem_V21_phase(signal)
 
     Fe = 48000; % Fréquence d'échantillonnage
     Te = 1/Fe; % Période d'échantillonnage
@@ -14,11 +14,19 @@ function [bits_restitues] = modem_V21(signal, phi0, phi1)
     F0 = Fc + delta_f;
     F1 = Fc - delta_f;
 
+    theta0 = rand*2*pi;
+    theta1 = rand*2*pi;
+
     x = reshape(signal, Ns, length(signal)/Ns);
     T = reshape(Te * [0:length(signal)-1], Ns, length(signal)/Ns);
-    x0 = x .* cos(2*pi*F0*T + phi0);
-    x1 = x .* cos(2*pi*F1*T + phi1);
+    x0_sin = x .* sin(2*pi*F0*T + theta0);
+    x0_cos = x .* cos(2*pi*F0*T + theta0);
+    x1_sin = x .* sin(2*pi*F0*T + theta1);
+    x1_cos = x .* cos(2*pi*F0*T + theta1);
+        
+    x0 = sum(x0_cos).^2 + sum(x0_sin).^2;
+    x1 = sum(x1_cos).^2 + sum(x1_sin).^2;
 
-    H = sum(x1) - sum(x0);
-    bits_restitues = H>0;
+    H = x1 - x0;
+    bits_restitues = H > 0;
 end    

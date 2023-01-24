@@ -248,12 +248,7 @@ taux = erreur/n_bits ; % le taux d'erreur
 % Evolution de l'erreur binaire en fonction du rapport signal sur bruit
 taux = zeros(1, length(SNR_tab));
 for i = 1:length(SNR_tab)
-    Xpb_d = filter(h_pb, 1, [x_perturbe_tab(i, :), zeros(1, floor(ordre/2) - 1)]);
-    Xpb = Xpb_d(floor(ordre/2):end);
-
-    Ypb = reshape(Xpb,Ns,n_bits);
-    energie = sum(Ypb.^2, 1);
-    bits_restitues = energie > K;
+    bits_restitues = modem_filtre(x_perturbe_tab(i, :));
     erreur = sum(bits_restitues' ~= bits);
     taux(i) = erreur/n_bits;
 end
@@ -296,6 +291,20 @@ title("NRZ en sortie")
 erreur = sum(bits_restitues' ~= bits);
 taux = erreur/n_bits ; % le taux d'erreur
 
+% Evolution de l'erreur binaire en fonction du rapport signal sur bruit
+taux = zeros(1, length(SNR_tab));
+for i = 1:length(SNR_tab)
+    bits_restitues = modem_V21(x_perturbe_tab(i, :), phi0, phi1);
+    erreur = sum(bits_restitues' ~= bits);
+    taux(i) = erreur/n_bits;
+end
+
+nexttile
+semilogx(SNR_tab, taux);
+xlabel("SNR")
+ylabel("Taux d'erreur binaire")
+title("TEB en fonction du rapport signal / bruit")
+
 
 % 6.2 Gestion d'une erreur de synchronisation de phase porteuse
 % 1 Introduction de l'erreur de phase porteuse
@@ -303,28 +312,47 @@ phi2 = rand*2*pi;
 phi3 = rand*2*pi;
 bits_non_synch = modem_V21(x_perturbe, phi2, phi3);
 
-taux_non_synch = sum(bits_non_synch' ~= bits)/n_bits
+taux_non_synch = sum(bits_non_synch' ~= bits)/n_bits;
 
 % Si la différence de phase entre le modulateur V21 et le démodulateur est
 % non nulle, alors les intégrales perdent leur propriété de négligeabilité
 
 
 % 2 Gestion d'une erreur de phase porteuse
+figure('name', 'Modem V21 avec phase')
+bits_restitues = modem_V21_phase(x_perturbe);
+
+NRZ_sortie = repelem(bits_restitues, Ns)';
+nexttile
+plot(T, NRZ);
+xlabel("temps (s)")
+ylabel("NRZ(t) en entrée")
+title("NRZ en entrée")
+nexttile
+plot(T, NRZ_sortie);
+xlabel("temps (s)")
+ylabel("NRZ(t) en sortie")
+title("NRZ en sortie")
+
+erreur = sum(bits_restitues' ~= bits);
+taux = erreur/n_bits ; % le taux d'erreur
 
 
+% Evolution de l'erreur binaire en fonction du rapport signal sur bruit
+taux = zeros(1, length(SNR_tab));
+for i = 1:length(SNR_tab)
+    bits_restitues = modem_V21_phase(x_perturbe_tab(i, :));
+    erreur = sum(bits_restitues' ~= bits);
+    taux(i) = erreur/n_bits;
+end
 
-function bits_res_GE = Demodulateur_FSK_GE(x, t, F0, F1, Ns)
-        x_reshaped = reshape(x, Ns, length(x)/Ns);
-        t_reshaped = reshape(t, Ns, length(x)/Ns);
-        x0_cos = x_reshaped .* cos(2*pi*F0*t_reshaped);
-        x0_sin = x_reshaped .* sin(2*pi*F0*t_reshaped);
-        x1_cos = x_reshaped .* cos(2*pi*F1*t_reshaped);
-        x1_sin = x_reshaped .* sin(2*pi*F1*t_reshaped);
-        x0 = sum(x0_cos).^2 + sum(x0_sin).^2;
-        x1 = sum(x1_cos).^2 + sum(x1_sin).^2;
-        H = x0 - x1;
-        bits_res_GE = H<0;
-end    
+nexttile
+semilogx(SNR_tab, taux);
+xlabel("SNR")
+ylabel("Taux d'erreur binaire")
+title("TEB en fonction du rapport signal / bruit")
+
+
 
 
 function [S_NRZ] = Signal_S_NRZ(f, t)
