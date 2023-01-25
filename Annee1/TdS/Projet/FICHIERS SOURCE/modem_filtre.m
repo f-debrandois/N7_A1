@@ -2,7 +2,7 @@
 %Felix Foucher
 %Achraf Marzougui
 
-function [bits_restitues] = modem_filtre(signal)
+function [bits_restitues] = modem_filtre(signal, F0, F1)
 
     Fe = 48000; % Fréquence d'échantillonnage
     Te = 1/Fe; % Période d'échantillonnage

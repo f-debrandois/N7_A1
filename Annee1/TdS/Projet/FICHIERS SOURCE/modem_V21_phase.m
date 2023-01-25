@@ -21,8 +21,8 @@ function [bits_restitues] = modem_V21_phase(signal)
     T = reshape(Te * [0:length(signal)-1], Ns, length(signal)/Ns);
     x0_sin = x .* sin(2*pi*F0*T + theta0);
     x0_cos = x .* cos(2*pi*F0*T + theta0);
-    x1_sin = x .* sin(2*pi*F0*T + theta1);
-    x1_cos = x .* cos(2*pi*F0*T + theta1);
+    x1_sin = x .* sin(2*pi*F1*T + theta1);
+    x1_cos = x .* cos(2*pi*F1*T + theta1);
         
     x0 = sum(x0_cos).^2 + sum(x0_sin).^2;
     x1 = sum(x1_cos).^2 + sum(x1_sin).^2;

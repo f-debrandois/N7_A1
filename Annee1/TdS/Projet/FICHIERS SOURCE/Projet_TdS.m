@@ -6,7 +6,11 @@ clear all ; close all;
 
 % Constantes
 n_bits = 20 ; % Nombre de bits
-bits = randi([0 1], n_bits, 1); % Signal à transmettre
+bits = randi([0 1], n_bits, 1); % Bits à transmettre
+
+phi0 = rand*2*pi;
+phi1 = rand*2*pi;
+
 Fe = 48000; % Fréquence d'échantillonnage
 Te = 1/Fe; % Période d'échantillonnage
 D = 300; % Débits de la transmission
@@ -19,12 +23,8 @@ delta_f = 100;
 F0 = Fc + delta_f;
 F1 = Fc - delta_f;
 
-% F0 = 6000;
-% F1 = 2000;
-% Fc = (F0 + F1)/2;
-
 Fc_norm = Fc/Fe;
-ordre = 201;
+ordre = 61;
 
 %% 3. Modem de fréquence
 % 3.1 Génération du signal NRZ
@@ -67,8 +67,6 @@ legend('DSP estimée', 'DSP théorique');
 figure('name', 'Signal modulé en fréquence')
 
 % 1 Géneration du signal x
-phi0 = rand*2*pi;
-phi1 = rand*2*pi;
 x = (1 - NRZ) .* cos(2*pi*F0*T + phi0) + NRZ .* cos(2*pi*F1*T + phi1);
 
 % 2 Tracage du signal
@@ -104,9 +102,9 @@ P_x = mean(abs(x).^2);
 SNR_dB = 50;
 P_y = P_x*10.^(-SNR_dB/10);
 bruit = sqrt(P_y) * randn(1, length(x));
-x_perturbe = x + bruit;
+
 nexttile
-plot(T, x_perturbe);
+plot(T, x + bruit);
 xlabel("temps (s)")
 ylabel("Signal perturbé")
 title("SNR_d_B = " + SNR_dB)
@@ -114,10 +112,14 @@ title("SNR_d_B = " + SNR_dB)
 SNR_tab = [1; 2; 10; 20; 50; 100];
 P_y_tab = P_x*10.^(-SNR_tab/10);
 bruit_tab = sqrt(P_y_tab) * randn(1, length(x));
-x_perturbe_tab = x + bruit_tab;
 
 
 %% 5. Démodulation par filtrage
+F0 = 6000;
+F1 = 2000;
+Fc = (F0 + F1)/2;
+[x_perturbe] = modulateur(bits, phi0, phi1, F0, F1) + bruit;
+[x_perturbe_tab] = modulateur(bits, phi0, phi1, F0, F1) + bruit_tab;
 
 % Filtre passe-bas
 figure('name', 'Filtre passe-bas')
@@ -223,11 +225,57 @@ title("Densité spectrale de puissance du signal en sortie du passe-haut")
 
 % 5.5 Détection d'énergie
 % 1 Calcul d'energie
-figure('name', 'Modem Filtre')
+figure('name', 'Signal de sortie par filtrage')
 Ypb = reshape(Xpb,Ns,n_bits);
 energie = sum(Ypb.^2);
 K = 10; % Trouvé expérimentalement
 bits_restitues = energie > K;
+NRZ_sortie = repelem(bits_restitues, Ns)';
+
+% 2 Erreur binaire
+taux = sum(bits_restitues' ~= bits)/n_bits ; % le taux d'erreur
+
+nexttile
+plot(T, NRZ);
+xlabel("temps (s)")
+ylabel("NRZ(t) en entrée")
+title("NRZ en entrée")
+nexttile
+plot(T, NRZ_sortie);
+xlabel("temps (s)")
+ylabel("NRZ(t) en sortie")
+title({['NRZ en sortie. SNR = ' num2str(SNR_dB)] ['Taux d''erreur = ' num2str(taux)]})
+
+
+
+% Evolution de l'erreur binaire en fonction du rapport signal sur bruit
+taux_tab = zeros(1, length(SNR_tab));
+for i = 1:length(SNR_tab)
+    bits_restitues = modem_filtre(x_perturbe_tab(i, :), F0, F1);
+    taux_tab(i) = sum(bits_restitues' ~= bits)/n_bits ; % le taux d'erreur
+end
+
+nexttile
+semilogx(SNR_tab, taux_tab);
+xlabel("SNR")
+ylabel("Taux d'erreur binaire")
+title("TEB en fonction du rapport signal / bruit")
+
+
+% 5.6 Modification du démodulateur
+figure('name', 'Modem Filtre')
+
+% ordre = 201
+
+Fc = 1080; % Fréquence de coupure
+delta_f = 100;
+F0 = Fc + delta_f;
+F1 = Fc - delta_f;
+[x_perturbe] = modulateur(bits, phi0, phi1, F0, F1) + bruit;
+
+bits_restitues = modem_filtre(x_perturbe, F0, F1);
+taux_filtre = sum(bits_restitues' ~= bits)/n_bits ; % le taux d'erreur
+
 NRZ_sortie = repelem(bits_restitues, Ns)';
 nexttile
 plot(T, NRZ);
@@ -238,30 +286,8 @@ nexttile
 plot(T, NRZ_sortie);
 xlabel("temps (s)")
 ylabel("NRZ(t) en sortie")
-title("NRZ en sortie")
+title({['NRZ en sortie. SNR = ' num2str(SNR_dB)] ['Taux d''erreur = ' num2str(taux_filtre)]})
 
-
-% 2 Erreur binaire
-erreur = sum(bits_restitues' ~= bits);
-taux = erreur/n_bits ; % le taux d'erreur
-
-% Evolution de l'erreur binaire en fonction du rapport signal sur bruit
-taux = zeros(1, length(SNR_tab));
-for i = 1:length(SNR_tab)
-    bits_restitues = modem_filtre(x_perturbe_tab(i, :));
-    erreur = sum(bits_restitues' ~= bits);
-    taux(i) = erreur/n_bits;
-end
-
-nexttile
-semilogx(SNR_tab, taux);
-xlabel("SNR")
-ylabel("Taux d'erreur binaire")
-title("TEB en fonction du rapport signal / bruit")
-
-
-% 5.6 Modification du démodulateur
-% 1 Ordre = 201
 
 % On trouve les mêmes résultats
 
@@ -275,6 +301,7 @@ figure('name', 'Modem V21')
 % 2 Implementation du demodulateur
 
 bits_restitues = modem_V21(x_perturbe, phi0, phi1);
+taux_V21 = sum(bits_restitues' ~= bits)/n_bits ; % le taux d'erreur
 
 NRZ_sortie = repelem(bits_restitues, Ns)';
 nexttile
@@ -286,21 +313,18 @@ nexttile
 plot(T, NRZ_sortie);
 xlabel("temps (s)")
 ylabel("NRZ(t) en sortie")
-title("NRZ en sortie")
+title({['NRZ en sortie. SNR = ' num2str(SNR_dB)] ['Taux d''erreur = ' num2str(taux_V21)]})
 
-erreur = sum(bits_restitues' ~= bits);
-taux = erreur/n_bits ; % le taux d'erreur
 
 % Evolution de l'erreur binaire en fonction du rapport signal sur bruit
-taux = zeros(1, length(SNR_tab));
+taux_V21_tab = zeros(1, length(SNR_tab));
 for i = 1:length(SNR_tab)
     bits_restitues = modem_V21(x_perturbe_tab(i, :), phi0, phi1);
-    erreur = sum(bits_restitues' ~= bits);
-    taux(i) = erreur/n_bits;
+    taux_V21_tab(i) = sum(bits_restitues' ~= bits)/n_bits ; % le taux d'erreur
 end
 
 nexttile
-semilogx(SNR_tab, taux);
+semilogx(SNR_tab, taux_V21_tab);
 xlabel("SNR")
 ylabel("Taux d'erreur binaire")
 title("TEB en fonction du rapport signal / bruit")
@@ -321,6 +345,7 @@ taux_non_synch = sum(bits_non_synch' ~= bits)/n_bits;
 % 2 Gestion d'une erreur de phase porteuse
 figure('name', 'Modem V21 avec phase')
 bits_restitues = modem_V21_phase(x_perturbe);
+taux_V21_phase = sum(bits_restitues' ~= bits)/n_bits ; % le taux d'erreur
 
 NRZ_sortie = repelem(bits_restitues, Ns)';
 nexttile
@@ -332,25 +357,22 @@ nexttile
 plot(T, NRZ_sortie);
 xlabel("temps (s)")
 ylabel("NRZ(t) en sortie")
-title("NRZ en sortie")
-
-erreur = sum(bits_restitues' ~= bits);
-taux = erreur/n_bits ; % le taux d'erreur
+title({['NRZ en sortie. SNR = ' num2str(SNR_dB)] ['Taux d''erreur = ' num2str(taux_V21_phase)]})
 
 
 % Evolution de l'erreur binaire en fonction du rapport signal sur bruit
-taux = zeros(1, length(SNR_tab));
+taux_V21_phase_tab = zeros(1, length(SNR_tab));
 for i = 1:length(SNR_tab)
     bits_restitues = modem_V21_phase(x_perturbe_tab(i, :));
-    erreur = sum(bits_restitues' ~= bits);
-    taux(i) = erreur/n_bits;
+    taux_V21_phase_tab(i) = sum(bits_restitues' ~= bits)/n_bits ; % le taux d'erreur
 end
 
 nexttile
-semilogx(SNR_tab, taux);
+semilogx(SNR_tab, taux_V21_phase_tab);
 xlabel("SNR")
 ylabel("Taux d'erreur binaire")
 title("TEB en fonction du rapport signal / bruit")
+
 
 
 
