@@ -39,6 +39,8 @@ end
 % Fonction choix_indice_elements (exercice_2.m) ---------------------------
 function tableau_indices_points_choisis = choix_indices_points(k_max,n,n_indices)
 
+    % Tableau de dimension k_max * n_indices constitué de k_max tirages
+    % aléatoires de n_indices
     tableau_indices_points_choisis = zeros(k_max, n_indices);
     for i = 1 : k_max
         tableau_indices_points_choisis(i, :) = randperm(n,n_indices);
@@ -55,15 +57,28 @@ function [rho_F_estime,theta_F_estime] = RANSAC_2(rho,theta,parametres,tableau_i
     ecart = Inf;
 
     for i = 1 : k_max
+
+        % On tire aléatoirement un sous-ensemble de données, considérées
+        % conforme au modèle
         indices = tableau_indices_2droites_choisies(i, :);
         [rho_F_i,theta_F_i,~] = estimation_F(rho(indices),theta(indices));
 
-        donnee_conforme = [abs(rho - rho_F_i*cos(theta - theta_F_i)) < S1];
+        % On trouve les données conformes aux données tirées précedemment
+        % suivant les paramètres d'entrée (S1)
+        donnee_conforme = abs(rho - rho_F_i*cos(theta - theta_F_i)) < S1;
         proportion = sum(donnee_conforme)/n;
-
+        
+        % Si la proportion de données conformes est supérieur au seuil S2,
+        % le modèle est accepté
         if proportion > S2
+
+            % Si le modèle est accepté, il est réestimé à partir de
+            % l'ensemble des données conformes
             [rho_F,theta_F,ecart_moyen] = estimation_F(rho(donnee_conforme),theta(donnee_conforme));
             if ecart_moyen < ecart
+
+                % Le modèle retenu est celui qui minimise l'écart moyen des
+                % données conformes
                 ecart = ecart_moyen;
                 rho_F_estime = rho_F;
                 theta_F_estime = theta_F;
@@ -76,12 +91,12 @@ end
 function [G, R_moyen, distances] = ...
          G_et_R_moyen(x_donnees_bruitees,y_donnees_bruitees)
 
-    x_moyen = mean(x_donnees_bruitees);
-    y_moyen = mean(y_donnees_bruitees);
-    G = [x_moyen y_moyen];
+    x_moyen = mean(x_donnees_bruitees); % moyenne des abscisse des points
+    y_moyen = mean(y_donnees_bruitees); % moyenne des ordonnées des points
+    G = [x_moyen y_moyen]; % Centre de gravité des points
 
     distances = sqrt((x_donnees_bruitees - x_moyen).^2 + (y_donnees_bruitees - y_moyen).^2);
-    R_moyen = mean(distances);
+    R_moyen = mean(distances); % Distance moyenne des points avec le centre de gravité
 end
 
 % Fonction estimation_C_et_R (exercice_3.m, bonus, fonction du TP1) -------
@@ -99,6 +114,7 @@ function [C_estime,R_estime,critere] = ...
     [~, i] = min(S);
     C_estime = C_tests(i, :);
     R_estime = R_tests(i);
+    critere = mean(abs(D - R_estime));
 end
 
 % Fonction RANSAC_3 (exercice_3, bonus) -----------------------------------
@@ -112,15 +128,29 @@ function [C_estime,R_estime] = ...
     ecart = Inf;
 
     for i = 1 : k_max
+
+        % On tire aléatoirement un sous-ensemble de données, considérées
+        % conforme au modèle
         indices = tableau_indices_3points_choisis(i, :);
         [C_i,R_i] = estimation_cercle_3points(x_donnees_bruitees(indices),y_donnees_bruitees(indices));
 
-        donnee_conforme = [abs(sqrt((C_i(1)-x_donnees_bruitees).^2 + (C_i(2)-y_donnees_bruitees).^2) - R_i) < S1];
+        % On trouve les données conformes aux données tirées précedemment
+        % suivant les paramètres d'entrée (S1)
+        donnee_conforme = abs(sqrt((C_i(1)-x_donnees_bruitees).^2 + (C_i(2)-y_donnees_bruitees).^2) - R_i) < S1;
         proportion = sum(donnee_conforme)/n;
 
+        % Si la proportion de données conformes est supérieur au seuil S2,
+        % le modèle est accepté
         if proportion > S2
-            [C_estime_F,R_estime_F,~] = estimation_C_et_R(x_donnees_bruitees(donnee_conforme),y_donnees_bruitees(donnee_conforme),n_tests,C_tests,R_tests)
+
+            % Si le modèle est accepté, il est réestimé à partir de
+            % l'ensemble des données conformes
+            [G, R_moyen, ~] = G_et_R_moyen(x_donnees_bruitees,y_donnees_bruitees);
+            [C_estime_F,R_estime_F,ecart_moyen] = estimation_C_et_R(x_donnees_bruitees(donnee_conforme),y_donnees_bruitees(donnee_conforme),length(C_i) ,C_i, R_i);
             if ecart_moyen < ecart
+                
+                % Le modèle retenu est celui qui minimise l'écart moyen des
+                % données conformes
                 ecart = ecart_moyen;
                 C_estime = C_estime_F;
                 R_estime = R_estime_F;
