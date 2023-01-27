@@ -1,5 +1,5 @@
 % Signal modulé et Bruit
-%Felix Foucher
+%Felix Foucher de Brandois
 %Achraf Marzougui
 
 clear all ; close all;
@@ -7,6 +7,7 @@ clear all ; close all;
 % Constantes
 n_bits = 20 ; % Nombre de bits
 bits = randi([0 1], n_bits, 1); % Bits à transmettre
+bits =[0; 1; 0; 0; 1; 1; 1; 0; 0; 1; 0; 0; 1; 0; 0; 0; 1; 0; 0; 1]
 
 phi0 = rand*2*pi;
 phi1 = rand*2*pi;
@@ -112,10 +113,6 @@ ylim([-1.5, 1.5])
 xlabel("temps (s)")
 ylabel("Signal perturbé")
 title("SNR_d_B = " + SNR_dB)
-
-SNR_tab = [1; 2; 10; 20; 50; 100];
-P_y_tab = P_x*10.^(-SNR_tab/10);
-bruit_tab = sqrt(P_y_tab) * randn(1, length(x));
 
 
 function [S_NRZ] = Signal_S_NRZ(f, t)

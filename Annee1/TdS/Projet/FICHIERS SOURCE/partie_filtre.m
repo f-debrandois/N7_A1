@@ -1,11 +1,12 @@
 % Demodulation par filtrage
-%Felix Foucher
+%Felix Foucher Foucher de Brandois
 %Achraf Marzougui
 
 clear all ; close all;
 
 n_bits = 20 ; % Nombre de bits
 bits = randi([0 1], n_bits, 1); % Bits à transmettre
+bits =[0; 1; 0; 0; 1; 1; 1; 0; 0; 1; 0; 0; 1; 0; 0; 0; 1; 0; 0; 1]
 
 phi0 = rand*2*pi;
 phi1 = rand*2*pi;
@@ -29,7 +30,7 @@ ordre = 61;
 K = 10; % Trouvé expérimentalement
 
 SNR_dB = 50;
-SNR_tab = [1; 2; 10; 20; 50; 100];
+SNR_tab = [1; 2; 10; 15; 20; 25; 30; 40; 50; 70; 100];
 
 
 T = 0:Te:(n_bits*Ns-1)*Te;
@@ -199,46 +200,3 @@ semilogx(SNR_tab, taux_tab_ph);
 xlabel("SNR")
 ylabel("Taux d'erreur binaire")
 title("TEB en fonction du rapport signal / bruit pour le passe-haut")
-
-
-function [signal] = modulateur(bits, phi0, phi1, F0, F1)
-
-    Fe = 48000; % Fréquence d'échantillonnage
-    Te = 1/Fe; % Période d'échantillonnage
-    D = 300; % Débits de la transmission
-    Ns = Fe/D; % Nombre d'échantillons par bits
-
-    T = Te * [0:(length(bits)*Ns-1)]; % Echelle temporelle 
-    NRZ = repelem(bits, Ns)'; % Signal NRZ
-    signal = (1 - NRZ) .* cos(2*pi*F0*T + phi0) + NRZ .* cos(2*pi*F1*T + phi1);
-end
-
-function [bits_restitues] = demodulateur_filtre(signal, F0, F1, ordre, K, type)
-
-    Fe = 48000; % Fréquence d'échantillonnage
-    Te = 1/Fe; % Période d'échantillonnage
-    D = 300; % Débits de la transmission
-    Ns = Fe/D; % Nombre d'échantillons par bits
-
-    Fc = (F0+F1)/2; % Fréquence de coupure
-    Fc_norm = Fc/Fe;  % fréquence normalisée
-
-    T_filtre = Te*[-(ordre-1)/2:(ordre-1)/2]; % Echelle temporelle du filtre passe bas
-    h_pb = 2*Fc_norm*sinc(2*Fc_norm*(T_filtre/Te)); % Reponse impulsionnelle du filtre passe bas
-    h_ph = -h_pb;
-    h_ph((ordre+1)/2) = h_ph((ordre+1)/2)+1;
-
-    if type == "pb"
-        Xpb_padded = filter(h_pb, 1, [signal, zeros(1, floor(ordre/2) - 1)]);
-        Xpb = Xpb_padded(floor(ordre/2):end);
-
-    elseif type == "ph"
-        Xpb_padded = filter(h_pb, 1, [signal, zeros(1, floor(ordre/2) - 1)]);
-        Xpb = Xpb_padded(floor(ordre/2):end);
-    end
-
-    Ypb = reshape(Xpb,Ns,length(signal)/Ns);
-    energie = sum(Ypb.^2, 1);
-    bits_restitues = energie > K;
-
-end
