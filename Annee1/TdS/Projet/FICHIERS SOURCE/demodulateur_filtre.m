@@ -20,6 +20,8 @@ function [bits_restitues] = demodulateur_filtre(signal, F0, F1, ordre, K, type)
     elseif type == "ph"
         Xpb_padded = filter(h_pb, 1, [signal, zeros(1, floor(ordre/2) - 1)]);
         Xpb = Xpb_padded(floor(ordre/2):end);
+    else
+        Xpb = 0;
     end
 
     Ypb = reshape(Xpb,Ns,length(signal)/Ns);

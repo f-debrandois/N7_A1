@@ -6,7 +6,6 @@ clear all ; close all;
 
 n_bits = 20 ; % Nombre de bits
 bits = randi([0 1], n_bits, 1); % Bits à transmettre
-bits =[0; 1; 0; 0; 1; 1; 1; 0; 0; 1; 0; 0; 1; 0; 0; 0; 1; 0; 0; 1]
 
 phi0 = rand*2*pi;
 phi1 = rand*2*pi;
