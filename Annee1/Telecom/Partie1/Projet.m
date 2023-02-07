@@ -29,12 +29,12 @@ St = filter(h, 1, At);
 figure('name', 'Modulateur 1')
 
 % Signal généré
-nexttile
-stem(T1,At)
-ylim([-1.5, 1.5])
-xlabel("temps (s)")
-ylabel("Signal temporel")
-title('Tracé du signal temporel');
+% nexttile
+% stem(T1,At)
+% ylim([-1.5, 1.5])
+% xlabel("temps (s)")
+% ylabel("Signal temporel")
+% title('Tracé du signal temporel');
 
 nexttile
 plot(T1,St)
@@ -44,8 +44,28 @@ ylabel("Signal filtré")
 title('Tracé du signal temporel filtré');
 
 % DSP du signal généré
+DSP_St = pwelch(St,[],[],[],Fe,'twosided');
+F = -Fe/2 : Fe/length(DSP_St) : Fe/2 - Fe/length(DSP_St); % Echelle fréquentielle
+
+nexttile
+semilogy(F, fftshift(DSP_St))
+xlabel("fréquence (Hz)")
+ylabel("DSP")
+title('Densité spectrale de puissance du signal s(t)');
 
 % Comparaison DSP estimée et théorique
+S_s = DSP_St;
+
+nexttile
+semilogy(F, fftshift(DSP_St))
+hold on
+semilogy(F, S_s)
+hold off
+xlabel('fréquence (Hz)');
+ylabel('signal');
+title('tracé de la DSP estimée et de la DSP théorique');
+legend('DSP estimée', 'DSP théorique');
+
 
 %% Modulateur 2
 % Mapping
@@ -63,13 +83,6 @@ figure('name', 'Modulateur 2')
 
 % Signal généré
 nexttile
-stem(T2,At)
-ylim([-3.5, 3.5])
-xlabel("temps (s)")
-ylabel("Signal temporel")
-title('Tracé du signal temporel');
-
-nexttile
 plot(T2,St)
 ylim([-3.5, 3.5])
 xlabel("temps (s)")
@@ -77,15 +90,35 @@ ylabel("Signal filtré")
 title('Tracé du signal temporel filtré');
 
 % DSP du signal généré
+DSP_St = pwelch(St,[],[],[],Fe,'twosided');
+F = -Fe/2 : Fe/length(DSP_St) : Fe/2 - Fe/length(DSP_St); % Echelle fréquentielle
+
+nexttile
+semilogy(F, fftshift(DSP_St))
+xlabel("fréquence (Hz)")
+ylabel("DSP")
+title('Densité spectrale de puissance du signal s(t)');
 
 % Comparaison DSP estimée et théorique
+S_s = DSP_St;
+
+nexttile
+semilogy(F, fftshift(DSP_St))
+hold on
+semilogy(F, S_s)
+hold off
+xlabel('fréquence (Hz)');
+ylabel('signal');
+title('tracé de la DSP estimée et de la DSP théorique');
+legend('DSP estimée', 'DSP théorique');
 
 
 
 %% Modulateur 3
 % Mapping
 LUT = [-3, -1, 3, 1];
-At = LUT(1+bi2de(reshape(bits, n_bits/2, 2), 'left-msb'));
+An = LUT(1+bi2de(reshape(bits, n_bits/2, 2), 'left-msb'));
+At = kron(An, [1, zeros(1, Ns-1)]);
 
 % 2. Filtre
 T3 = 0:Te:(n_bits*Ns-1)*Te; % Echelle temporelle
@@ -111,5 +144,25 @@ ylabel("Signal filtré")
 title('Tracé du signal temporel filtré');
 
 % DSP du signal généré
+DSP_St = pwelch(St,[],[],[],Fe,'twosided');
+F = -Fe/2 : Fe/length(DSP_St) : Fe/2 - Fe/length(DSP_St); % Echelle fréquentielle
+
+nexttile
+semilogy(F, fftshift(DSP_St))
+xlabel("fréquence (Hz)")
+ylabel("DSP")
+title('Densité spectrale de puissance du signal s(t)');
 
 % Comparaison DSP estimée et théorique
+S_s = DSP_St;
+
+nexttile
+semilogy(F, fftshift(DSP_St))
+hold on
+semilogy(F, S_s)
+hold off
+xlabel('fréquence (Hz)');
+ylabel('signal');
+title('tracé de la DSP estimée et de la DSP théorique');
+legend('DSP estimée', 'DSP théorique');
+
