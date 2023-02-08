@@ -68,7 +68,7 @@ legend('DSP estimée', 'DSP théorique');
 
 
 %% Modulateur 2
-% Mapping
+% 1. Mapping
 LUT = [-3, -1, 3, 1];
 An = LUT(1+bi2de(reshape(bits, n_bits/2, 2), 'left-msb'));
 At = kron(An, [1, zeros(1, Ns-1)]);
@@ -115,14 +115,13 @@ legend('DSP estimée', 'DSP théorique');
 
 
 %% Modulateur 3
-% Mapping
-LUT = [-3, -1, 3, 1];
-An = LUT(1+bi2de(reshape(bits, n_bits/2, 2), 'left-msb'));
+% 1. Mapping
+An = (2*bits - 1)';
 At = kron(An, [1, zeros(1, Ns-1)]);
 
 % 2. Filtre
 T3 = 0:Te:(n_bits*Ns-1)*Te; % Echelle temporelle
-h = ones(1, Ns/2); % Reponse impulsionnelle du filtre
+h = rcosdesign(a, L, Ns); % Reponse impulsionnelle du filtre
 St = filter(h, 1, At);
 
 % 3. Tracés
