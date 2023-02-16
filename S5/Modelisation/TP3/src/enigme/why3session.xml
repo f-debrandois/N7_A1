@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="6">
+<prover id="0" name="Alt-Ergo" version="2.4.2" timelimit="5" steplimit="0" memlimit="1000"/>
+<file format="whyml">
+<path name=".."/><path name="enigme.mlw"/>
+<theory name="Enquete">
+ <goal name="Cas1">
+ <proof prover="0"><result status="unknown" time="0.03"/></proof>
+ </goal>
+ <goal name="Cas2">
+ <proof prover="0"><result status="unknown" time="0.02"/></proof>
+ </goal>
+ <goal name="Cas3">
+ <proof prover="0"><result status="unknown" time="0.01"/></proof>
+ </goal>
+ <goal name="Cas4">
+ <proof prover="0"><result status="unknown" time="0.02"/></proof>
+ </goal>
+ <goal name="Cas5">
+ <proof prover="0"><result status="unknown" time="0.02"/></proof>
+ </goal>
+ <goal name="Cas6" proved="true">
+ <proof prover="0"><result status="valid" time="0.00" steps="16"/></proof>
+ </goal>
+ <goal name="Cas7">
+ <proof prover="0"><result status="unknown" time="0.02"/></proof>
+ </goal>
+ <goal name="Cas8">
+ <proof prover="0"><result status="unknown" time="0.02"/></proof>
+ </goal>
+ <goal name="Deduis1" proved="true">
+ <proof prover="0"><result status="valid" time="0.00" steps="6"/></proof>
+ </goal>
+ <goal name="Deduis2">
+ <proof prover="0"><result status="unknown" time="0.03"/></proof>
+ </goal>
+ <goal name="Deduis3" proved="true">
+ <proof prover="0"><result status="valid" time="0.00" steps="6"/></proof>
+ </goal>
+ <goal name="Inno1">
+ <proof prover="0"><result status="unknown" time="0.02"/></proof>
+ </goal>
+ <goal name="Inno2" proved="true">
+ <proof prover="0"><result status="valid" time="0.00" steps="8"/></proof>
+ </goal>
+ <goal name="Inno3">
+ <proof prover="0"><result status="unknown" time="0.01"/></proof>
+ </goal>
+ <goal name="Verite1">
+ <proof prover="0"><result status="unknown" time="0.01"/></proof>
+ </goal>
+ <goal name="Verite2" proved="true">
+ <proof prover="0"><result status="valid" time="0.00" steps="10"/></proof>
+ </goal>
+ <goal name="Verite3">
+ <proof prover="0"><result status="unknown" time="0.03"/></proof>
+ </goal>
+</theory>
+</file>
+</why3session>

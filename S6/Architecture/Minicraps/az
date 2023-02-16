@@ -1,0 +1,6 @@
+   areg[3..0] = "1110"*fetch + ir[23..20]*decode2pcplus1
+   breg[3..0] = "0000"*fetch + ir[19..16]*decode2pcplus1
+   dreg[3..0] = "1111"*fetch + ir[27..24]*decode2pcplus1
+   ualCmd[3..0] = "0000"*fetch + ir[31..28]*decode2pcplus1
+	dbusIn[1..0] = "10"*fetch + "01"
+   write = 0*fetch + 0*decode2pcplus1
