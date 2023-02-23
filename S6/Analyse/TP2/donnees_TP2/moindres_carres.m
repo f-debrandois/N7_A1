@@ -1,4 +1,4 @@
-function [beta] = moindres_carres(d,x,y,beta_0)
+function [parametres] = moindres_carres(d,x,y,beta_0)
     p = length(x);
     % On construit les matrices A et B
     A = zeros(p, d);
@@ -8,7 +8,7 @@ function [beta] = moindres_carres(d,x,y,beta_0)
 
     B = y - (beta_0 * (1-x).^d);
 
-    beta = A\B; % beta = (A'A)−1 A' B  
+    parametres = A\B; % beta = (A'A)−1 A' B  
 
 end
 
