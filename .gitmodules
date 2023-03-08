@@ -1,3 +1,6 @@
 [submodule "Projet_TOB"]
 	path = Projet_TOB
 	url = https://github.com/c-l-e-m-e-n-t/SimulateurDeFoule.git
+[submodule "S6/Projet_TOB"]
+	path = S6/Projet_TOB
+	url = https://github.com/c-l-e-m-e-n-t/SimulateurDeFoule.git
