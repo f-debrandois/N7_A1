@@ -128,7 +128,7 @@ An = (2*bits - 1)';
 At = kron(An, [1, zeros(1, Ns-1)]);
 
 % 2. Filtre
-alpha = 0.4;
+alpha = 0.5;
 L = 10;
 
 T3 = 0:Te:(n_bits*Ns-1)*Te; % Echelle temporelle
