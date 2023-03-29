@@ -271,7 +271,7 @@ check write 0
 set clk 1
 set clk 0
 // set %rdest, valeur24
-set ir[31..16] 1000101101101001
+set ir[31..16] 1001101101101001
 
 // decode
 check fetch 0
@@ -302,7 +302,7 @@ check accessram 1
 check areg[3..0] 1100
 check breg[3..0] 1011
 check dreg[3..0] 1111
-check ualCmd[3..0] 1000
+check ualCmd[3..0] 1001
 check dbusIn[1..0] 11
 check write 1
 
