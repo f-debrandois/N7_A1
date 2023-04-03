@@ -1,0 +1,42 @@
+Dans ce fichier `reponses1.txt`, 
+
+
+[Question 1.1] Indiquer 
+- comment obtenir le ou les exécutables par compilation séparée.
+
+Pour obtenir le ou les exécutables par compilation séparée, 
+on doit d'abord générer les fichiers objet avec la commande "gcc -c file.h file.c test_file.c".
+Ensuite, on peut faire le lien entre les fichiers objets 
+avec la commande "gcc file.o test_file.o -o appli.out".
+
+
+- les dépendances entre les fichiers qui constituent l’application.
+
+Les fichiers qui constituent l'application ont une dépendance avec le fichier d'en-tête
+"file.h", qui décrit les structures et les fonctions implémentées.
+
+
+- le rôle de la règle `.PHONY` dans Makefile.
+
+La règle ".PHONY" dans le Makefile indique que la cible n'est pas un fichier,
+mais une commande à exécuter.
+
+
+[Question 1.5] Indiquer
+- Quel est le sous-programme non-visible des autres modules et défini dans le module File.
+
+C'est le sous-programme Cellule : il comporte le mot-clé static.
+
+
+- Que se passe-t-il si on enlève le mot-clé static à la compilation ?  
+
+Si on enlève le mot-clé "static" lors de la compilation, la méthode Cellule sera visible partout.
+
+
+- Quel est le risque de ne pas le mettre ?
+
+Le risque est de rendre la fonction visible dans tous les autres fichiers source
+qui incluent file.h. 
+Cela peut entraîner des conflits de noms de fonctions ou des erreurs de liens
+lors de la compilation.
+
