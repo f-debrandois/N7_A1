@@ -11,15 +11,16 @@ bits = randi([0 1], n_bits, 1); % Bits à transmettre
 
 Fe = 24000; % Fréquence d'échantillonnage
 Te = 1/Fe; % Période d'échantillonnage
-D = 3000; % Débits de la transmission
-Ns = Fe/D; % Nombre d'échantillons par bits
-Ts = Ns/Fe; % Période par bits
-Fs = 1/Ts; %% Fréquence des bits
+Rb = 3000; % Débits de la transmission
+Tb = 1/Rb; % Période par bits
 
 
 %% 2. Etude de modulateurs bande de base
 % Modulateur 1 ----------------------
 % 1. Mapping
+Ts = Tb; % Période symbole
+Ns = Fe * Ts; % Nombre d'échantillons par bits
+
 An = (2*bits - 1)';
 At = kron(An, [1, zeros(1, Ns-1)]);
 
@@ -71,6 +72,9 @@ figure('name', 'Modulateur 1')
 
 % Modulateur 2 ----------------------
 % 1. Mapping
+Ts = 2 * Tb; % Période symbole
+Ns = Fe * Ts; % Nombre d'échantillons par bits
+
 LUT = [-3, -1, 3, 1];
 An = LUT(1+bi2de(reshape(bits, n_bits/2, 2), 'left-msb'));
 At = kron(An, [1, zeros(1, Ns-1)]);
@@ -124,6 +128,9 @@ figure('name', 'Modulateur 2')
 
 % Modulateur 3 ----------------------
 % 1. Mapping
+Ts = Tb; % Période symbole
+Ns = Fe * Ts; % Nombre d'échantillons par bits
+
 An = (2*bits - 1)';
 At = kron(An, [1, zeros(1, Ns-1)]);
 
@@ -179,86 +186,16 @@ figure('name', 'Modulateur 3')
     title('Tracé de la DSP estimée et de la DSP théorique');
     legend('DSP estimée', 'DSP théorique');
 
-
-%% 3. Etude des interférences entre symbole et du critère de Nyquist
-% 3.1 Etude sans canal de propagation
-% Modulateur 1 ----------------------
-    % Filtre de réception
-    figure('name', 'Modulateur 1')
-    
-    hr1 =h1;
-    z1 = filter(hr1,1,x1);
+% Comparaison des modulateurs -------
+    figure('name', 'Comparaison des modulateurs')
     nexttile
-    plot(z1);
-    %ylim([-10, 10])
-    title('Signal en sortie de filtre de récéption');
-    ylabel('Signal en sortie');
-    xlabel('Temps (s)')
-    
-    % Réponse impulsionnelle globale
-    nexttile
-    g1 = conv(h1,hr1);
-    plot(g1);
-    title('Réponse impulsionnelle totale');
-    xlabel('Temps (s)')
-    
-    % Diagramme de l'oeil
-    nexttile
-    plot(reshape(z1,Ns,length(z1)/Ns));
-    title('Diagramme de l''oeil');
-    xlabel('Temps (s)')
-
- 
-% Modulateur 2 ----------------------
-    % Filtre de réception
-    figure('name', 'Modulateur 2')
-    
-    hr2 =h2;
-    z2 = filter(hr2,1,x2);
-    nexttile
-    plot(z2);
-    %ylim([-10, 10])
-    title('Signal en sortie de filtre de récéption');
-    ylabel('Signal en sortie');
-    xlabel('Temps (s)')
-    
-    % Réponse impulsionnelle globale
-    nexttile
-    g2 = conv(h2,hr2);
-    plot(g2);
-    title('Réponse impulsionnelle totale');
-    xlabel('Temps (s)')
-    
-    % Diagramme de l'oeil
-    nexttile
-    plot(reshape(z2,Ns,length(z2)/Ns));
-    title('Diagramme de l''oeil');
-    xlabel('Temps (s)')
-
-    % Modulateur 3 ----------------------
-    % Filtre de réception
-    figure('name', 'Modulateur 3')
-    
-    hr3 =h3;
-    z3 = filter(hr3,1,x3);
-    nexttile
-    plot(z3);
-    %ylim([-10, 10])
-    title('Signal en sortie de filtre de récéption');
-    ylabel('Signal en sortie');
-    xlabel('Temps (s)')
-    
-    % Réponse impulsionnelle globale
-    nexttile
-    g3 = conv(h3,hr3);
-    plot(g3);
-    title('Réponse impulsionnelle totale');
-    xlabel('Temps (s)')
-    
-    % Diagramme de l'oeil
-    nexttile
-    plot(reshape(z3,Ns,length(z3)/Ns));
-    title('Diagramme de l''oeil');
-    xlabel('Temps (s)')
-
- 
+    semilogy(F1,DSP_x1)
+    hold on
+    semilogy(F2, DSP_x2)
+    hold on
+    semilogy(F3, DSP_x3)
+    hold off
+    xlabel('fréquence (Hz)');
+    ylabel('signal');
+    title('Tracé de la DSP estimée des 3 modulateurs');
+    legend('Mod 1', 'Mod 2', 'Mod 3');
