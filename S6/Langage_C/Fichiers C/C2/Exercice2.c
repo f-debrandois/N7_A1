@@ -11,7 +11,7 @@
 #include <stdbool.h>
 #include <time.h>
 
-#define NB_VALEURS XXX
+#define NB_VALEURS 10
 #define NB_CARTES 4*NB_VALEURS
 
 //Définition du type enseigne
@@ -121,7 +121,9 @@ void afficher_jeu(jeu le_jeu){
     // ***** TODO ***** 
     // Afficher le jeu complet. Les carte sont listées sur une même ligne, 
     // et séparées par une tabulation \t
-    printf("\n");
+    for (int i = 0; i < NB_CARTES; i++) {
+        afficher_carte(le_jeu[i]);
+    }
 }
 
 /**
@@ -132,7 +134,9 @@ void afficher_main(t_main la_main){
     // ***** TODO ***** 
     // Afficher le jeu complet. Les carte sont listées sur une même ligne, 
     // et séparées par une tabulation \t
-    printf("\n");
+    for (int i = 0; i < la_main.nb; i++) {
+        afficher_carte(la_main.main[i]);
+    }
 }
 
 /**
@@ -145,7 +149,10 @@ void melanger_jeu(jeu le_jeu){
         int i = rand()%NB_CARTES;
         int j = rand()%NB_CARTES;        
         // Les échanger
-        // ***** TODO **** 
+        // ***** TODO ****
+        carte temp = le_jeu[i];
+        le_jeu[i] = le_jeu[j];
+        le_jeu[j] = temp;
     }
 }
 
@@ -239,6 +246,10 @@ void test_preparer_jeu_UNO(){
         
     //Détruire la mémoire allouée dynamiquement
     // ***** TODO *****
+    free(main_A.main);
+    free(main_B.main);
+    main_A.main = NULL;
+    main_B.main = NULL;
     
     assert(main_A.main == NULL);
     assert(main_B.main == NULL);

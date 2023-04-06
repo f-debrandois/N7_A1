@@ -1,14 +1,17 @@
+CC= c99
+CFLAGS= -Wextra -pedantic -c
+LDFLAGS=
+
+
+all: ephemeride
+
 ephemeride: date.o ephemeride.o
-	c99 date.o ephemeride.o -o ephemeride
-
-date.o: date.c date.h
-	c99 -Wextra -pedantic -c date.c
-
-ephemeride.o: ephemeride.c
-	c99 -Wextra -pedantic -c ephemeride.c
+	$(CC) $(LDFLAGS) $^ -o $@
 
 clean:
 	rm *.o ephemeride
+
+.PHONY: all clean
 # DO NOT DELETE
 
 EDT.o: cours.h salle.h date.h enseignant.h
