@@ -94,7 +94,7 @@ z = filter(hr, 1, filter(hc, 1,x));
     plot(abs(Hc));
     hold off
     title('Réponses en fréquence du filtre');
-    xlabel('Temps (s)')
+    xlabel('Fréquance (Hz)')
     legend('H * Hr', 'Hc');
 
 TEB = 0;
