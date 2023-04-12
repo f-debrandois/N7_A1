@@ -66,7 +66,7 @@ figure('name', 'Implantation Optimale')
 BW = 8000;
 
 ordre = 61;
-hc = 2*(BW/Fe)* sinc(2*BW/Fe*(-(ordre-1)/2:1:(ordre-1)/2)); % Filtre du canal
+hc = 2*(BW/Fe) * sinc(2*BW/Fe*(-(ordre-1)/2:1:(ordre-1)/2)); % Filtre du canal
 
 z = filter(hr, 1, filter(hc, 1,x));
 
