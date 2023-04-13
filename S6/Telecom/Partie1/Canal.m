@@ -28,9 +28,14 @@ h = ones(1, Ns); % Reponse impulsionnelle du filtre
 hr = h; % Reponse impulsionnelle du filtre de réception
 
 x = filter(h, 1, At);
-z = filter(hr, 1,x);
+z1 = filter(hr, 1,x);
 
-TEB = 0;
+% Echantillonnage et detecteur à seuil
+n0 = Ns;
+echantillon = z1(n0:Ns:end);
+
+bits_sortie1 = (sign(echantillon) + 1) / 2;
+TEB_1 = sum(bits_sortie1' ~= bits) / n_bits;
 
 % 3.1 Etude sans canal de propagation
 % 1. Implantation optimale
@@ -38,7 +43,7 @@ figure('name', 'Implantation Optimale')
 
     % Filtre de réception
     nexttile
-    plot(z);
+    plot(z1);
     %ylim([-10, 10])
     title('Signal en sortie de filtre de récéption');
     ylabel('Signal en sortie');
@@ -53,12 +58,9 @@ figure('name', 'Implantation Optimale')
 
     % Diagramme de l'oeil
     nexttile
-    plot(reshape(z,Ns,length(z)/Ns));
+    plot(reshape(z1,Ns,length(z1)/Ns));
     title('Diagramme de l''oeil');
     xlabel('Temps (s)')
-
-% Implantation avec des instants d'échantillonnage modifiés
-
 
 
 % 3.2 Etude avec canal de propagation sans bruit
@@ -68,8 +70,16 @@ BW = 8000;
 ordre = 61;
 hc = 2*(BW/Fe) * sinc(2*BW/Fe*(-(ordre-1)/2:1:(ordre-1)/2)); % Filtre du canal
 
-z = filter(hr, 1, filter(hc, 1,x));
+z2 = filter(hr, 1, filter(hc, 1,x));
 
+% Echantillonnage et detecteur à seuil
+n0 = Ns;
+echantillon = z2(n0:Ns:end);
+
+bits_sortie = (sign(echantillon) + 1) / 2;
+TEB_2 = sum(bits_sortie' ~= bits) / n_bits;
+
+figure('name', 'Canal de propagation sans bruit')
     % Reponse impulsionnelle de g
     g = conv(conv(h,hc), hr);
     nexttile
@@ -79,7 +89,7 @@ z = filter(hr, 1, filter(hc, 1,x));
 
     % Diagramme de l'oeil
     nexttile
-    plot(reshape(z,Ns,length(z)/Ns));
+    plot(reshape(z2,Ns,length(z2)/Ns));
     title('Diagramme de l''oeil');
     xlabel('Temps (s)')
 
@@ -96,5 +106,3 @@ z = filter(hr, 1, filter(hc, 1,x));
     title('Réponses en fréquence du filtre');
     xlabel('Fréquance (Hz)')
     legend('H * Hr', 'Hc');
-
-TEB = 0;
