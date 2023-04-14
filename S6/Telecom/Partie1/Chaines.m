@@ -6,7 +6,7 @@
 clear all ; close all;
 
 % Constantes
-n_bits = 2000; % Nombre de bits
+n_bits = 1000; % Nombre de bits
 bits = randi([0 1], n_bits, 1); % Bits à transmettre
 
 Fe = 24000; % Fréquence d'échantillonnage
@@ -36,8 +36,8 @@ n0 = Ns;            % Choix du t0 pour respecter le critère de Nyquist
     z1 = filter(hr1, 1, x1); % Filtre de réception
 
     echantillon = z1(n0:Ns:end); % Echantillonage
-    bits_sortie = (sign(echantillon) + 1) / 2;
-    TEB1 = sum(bits_sortie' ~= bits) / n_bits;
+    bits_sortie1 = (sign(echantillon) + 1) / 2;
+    TEB1 = sum(bits_sortie1' ~= bits) / n_bits;
 
     % Diagramme de l'oeil
     nexttile
@@ -46,6 +46,17 @@ n0 = Ns;            % Choix du t0 pour respecter le critère de Nyquist
     xlabel('Temps (s)')
 
     fprintf("TEB chaine 1 : " + TEB1 + "\n");
+
+    nexttile
+    stem([0:(n_bits*Ns-1)]*Te,At)
+    ylim([-1.5, 1.5])
+    hold on
+    stem([0:(n_bits*Ns-1)]*Te, kron((2*bits_sortie1 - 1), [1, zeros(1, Ns-1)]))
+    hold off
+    xlabel("temps (s)")
+    ylabel("Signal temporel")
+    title('Comparaison des bits pour l''implantation optimale');
+    legend('Bits de départ', 'Bits d''arrivée');
 
 % Avec bruit
 TEB1_bruit = zeros(1, length(EbN0));
@@ -77,6 +88,7 @@ end
     xlabel('Temps (s)')
 
     % TEB Obtenu et théorique
+    nexttile
     TEB1_theorique = qfunc(sqrt(2*(10.^(EbN0/10))));
     semilogy(EbN0,TEB1_bruit)
     hold on
@@ -94,7 +106,7 @@ Ts = Tb;            % Période symbole
 Ns = Fe * Ts;       % Nombre d'échantillons par bits
 h = ones(1, Ns);    % Reponse impulsionnelle du filtre de mise en forme
 hr2 = ones(1, floor(Ns/2)); % Reponse impulsionnelle du filtre de réception
-n0 = Ns;            % Choix du t0 pour respecter le critère de Nyquist
+n0 = floor(Ns/2);            % Choix du t0 pour respecter le critère de Nyquist
 
 % Sans bruit
     % Mapping
@@ -105,8 +117,8 @@ n0 = Ns;            % Choix du t0 pour respecter le critère de Nyquist
     z2 = filter(hr2, 1, x2);
 
     echantillon = z2(n0:Ns:end);
-    bits_sortie = (sign(echantillon) + 1) / 2;
-    TEB2 = sum(bits_sortie' ~= bits) / n_bits;
+    bits_sortie2 = (sign(echantillon) + 1) / 2;
+    TEB2 = sum(bits_sortie2' ~= bits) / n_bits;
 
     % Diagramme de l'oeil
     nexttile
@@ -115,6 +127,17 @@ n0 = Ns;            % Choix du t0 pour respecter le critère de Nyquist
     xlabel('Temps (s)')
 
     fprintf("TEB chaine 2 : " + TEB2 + "\n");
+   
+    nexttile
+    stem([0:(n_bits*Ns-1)]*Te,At)
+    ylim([-1.5, 1.5])
+    hold on
+    stem([0:(n_bits*Ns-1)]*Te, kron((2*bits_sortie2 - 1), [1, zeros(1, Ns-1)]))
+    hold off
+    xlabel("temps (s)")
+    ylabel("Signal temporel")
+    title('Comparaison des bits pour l''implantation optimale');
+    legend('Bits de départ', 'Bits d''arrivée');
 
 % Avec bruit
 TEB2_bruit = zeros(1, length(EbN0));
@@ -146,6 +169,7 @@ end
     xlabel('Temps (s)')
 
     % TEB Obtenu et théorique
+    nexttile
     TEB2_theorique = qfunc(sqrt(2*(10.^(EbN0/10))));
     semilogy(EbN0,TEB2_bruit)
     hold on
@@ -160,7 +184,7 @@ end
 % Chaine 3 ---------------------------------------------------------
 figure('name', 'Chaine 3')
 
-Ts = 2 * Tb;        % Période symbole
+Ts = Tb;        % Période symbole
 Ns = Fe * Ts;       % Nombre d'échantillons par bits
 h = ones(1, Ns);    % Reponse impulsionnelle du filtre de mise en forme
 hr3 = ones(1, Ns); % Reponse impulsionnelle du filtre de réception
@@ -169,15 +193,23 @@ n0 = Ns;            % Choix du t0 pour respecter le critère de Nyquist
 % Sans bruit
     % Mapping
     LUT = [-3, -1, 3, 1];
+    %An = (2*bi2de(reshape(bits, 2,length(bits)/2)') - 3)';
     An = LUT(1+bi2de(reshape(bits, n_bits/2, 2), 'left-msb'));
     At = kron(An, [1, zeros(1, Ns-1)]);
 
     x3 = filter(h, 1, At);
-    z3 = filter(hr2, 1, x3);
+    z3 = filter(hr3, 1, x3);
 
     echantillon = z3(n0:Ns:end);
-    bits_sortie = (sign(echantillon) + 1) / 2;
-    TEB3 = sum(bits_sortie' ~= bits) / n_bits;
+    symboles = zeros(1,length(echantillon));
+    symboles(echantillon > 2 * Ns) = 3;
+    symboles(echantillon >= 0 & echantillon <= 2 * Ns) = 1;
+    symboles(echantillon < -2 * Ns) = -3;
+    symboles(echantillon >= -2 * Ns & echantillon < 0) = -1;
+
+    [~, rank] = ismember(symboles, LUT);
+    bits_sortie3 = reshape(de2bi(rank-1, 'left-msb'),1,n_bits);
+    TEB3 = sum(bits_sortie3' ~= bits) / n_bits;
 
     % Diagramme de l'oeil
     nexttile
@@ -185,7 +217,18 @@ n0 = Ns;            % Choix du t0 pour respecter le critère de Nyquist
     title('Diagramme de l''oeil');
     xlabel('Temps (s)')
 
-    fprintf("TEB chaine 3 : " + TEB2 + "\n");
+    fprintf("TEB chaine 3 : " + TEB3 + "\n");
+
+    nexttile
+    stem([0:((n_bits*Ns/2)-1)]*Te,At)
+    ylim([-3.5, 3.5])
+    hold on
+    stem([0:((n_bits*Ns/2)-1)]*Te, kron(symboles, [1, zeros(1, Ns-1)]))
+    hold off
+    xlabel("temps (s)")
+    ylabel("Signal temporel")
+    title('Comparaison des bits pour l''implantation optimale');
+    legend('Bits de départ', 'Bits d''arrivée');
 
 % Avec bruit
 TEB3_bruit = zeros(1, length(EbN0));
@@ -194,14 +237,21 @@ for i = 1:length(EbN0)
 
     % Canal de propagation
     sigma2 = mean(x3.^2)*Ns/(4*10^(EbN0(i)/10));
-    bruit = sqrt(sigma2)*randn(1, Ns*n_bits);
+    bruit = sqrt(sigma2)*randn(1, Ns*n_bits/2);
     r3 = x3 + bruit;
 
     z3 = filter(hr3, 1, r3);
     z3_bruit(i, :) = z3;
 
     echantillon = z3(n0:Ns:end);
-    bits_sortie = (sign(echantillon) + 1) / 2;
+    symboles = zeros(1,length(echantillon));
+    symboles(echantillon > 2 * Ns) = 3;
+    symboles(echantillon >= 0 & echantillon <= 2 * Ns) = 1;
+    symboles(echantillon < -2 * Ns) = -3;
+    symboles(echantillon >= -2 * Ns & echantillon < 0) = -1;
+
+    [~, rank] = ismember(symboles, LUT);
+    bits_sortie = reshape(de2bi(rank-1, 'left-msb'),1,n_bits);
     TEB3_bruit(i) = sum(bits_sortie' ~= bits) / n_bits;
 end
 
@@ -217,7 +267,8 @@ end
     xlabel('Temps (s)')
 
     % TEB Obtenu et théorique
-    TEB3_theorique = qfunc(sqrt(2*(10.^(EbN0/10))));
+    nexttile
+    TEB3_theorique = (3/2) *qfunc(sqrt((4/5)*(10.^(EbN0/10)))); 
     semilogy(EbN0,TEB3_bruit)
     hold on
     semilogy(EbN0,TEB3_theorique)
@@ -233,6 +284,7 @@ end
 figure('name', "Comparaison des chaines de transmission implantées")
 
     % TEB des chaines 1 et 2
+    nexttile
     plot(TEB1_bruit)
     hold on
     plot(TEB2_bruit)
@@ -241,19 +293,17 @@ figure('name', "Comparaison des chaines de transmission implantées")
     legend("Chaine 1","Chaine 2")
     ylabel("TEB")
 
-% Efficacité de puissance chaines 1 et 2
+    % Efficacité de puissance chaines 1 et 2
 
 
     % TEB des chaines 1 et 3
+    nexttile
     plot(TEB1_bruit)
     hold on
     plot(TEB3_bruit)
     hold off
-    title("Comparaison entre le TEB des chaines 1 et 2")
-    legend("Chaine 1","Chaine 2")
+    title("Comparaison entre le TEB des chaines 1 et 3")
+    legend("Chaine 1","Chaine 3")
     ylabel("TEB")
 
-% Efficacité de puissance chaines 1 et 3
-
-
-
+    % Efficacité de puissance chaines 1 et 3

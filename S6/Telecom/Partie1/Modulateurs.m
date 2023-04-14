@@ -6,7 +6,7 @@
 clear all ; close all;
 
 % Constantes
-n_bits = 2000; % Nombre de bits
+n_bits = 1000; % Nombre de bits
 bits = randi([0 1], n_bits, 1); % Bits à transmettre
 
 Fe = 24000; % Fréquence d'échantillonnage
@@ -54,7 +54,7 @@ figure('name', 'Modulateur 1')
     semilogy(F1, DSP_x1)
     xlabel("fréquence (Hz)")
     ylabel("DSP")
-    title('Densité spectrale de puissance du signal s(t)');
+    title('Densité spectrale de puissance du signal x(t)');
     
     % Comparaison DSP estimée et théorique
     DSP_th_x1 = Ts * sinc(F1*Ts).^2;
@@ -109,7 +109,7 @@ figure('name', 'Modulateur 2')
     semilogy(F2, DSP_x2)
     xlabel("fréquence (Hz)")
     ylabel("DSP")
-    title('Densité spectrale de puissance du signal s(t)');
+    title('Densité spectrale de puissance du signal x(t)');
     
     % Comparaison DSP estimée et théorique
     DSP_th_x2 = 5 * Ts * sinc(F2*Ts).^2;
@@ -167,7 +167,7 @@ figure('name', 'Modulateur 3')
     semilogy(F3, DSP_x3)
     xlabel("fréquence (Hz)")
     ylabel("DSP")
-    title('Densité spectrale de puissance du signal s(t)');
+    title('Densité spectrale de puissance du signal x(t)');
     
     % Comparaison DSP estimée et théorique
     DSP_th_x3 = zeros(1, length(F3));

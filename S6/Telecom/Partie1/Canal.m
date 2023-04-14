@@ -6,8 +6,9 @@
 clear all ; close all;
 
 % Constantes
-n_bits = 2000; % Nombre de bits
+n_bits = 1000; % Nombre de bits
 bits = randi([0 1], n_bits, 1); % Bits à transmettre
+%bits = [0     1     1     1     0     1     0     1     1     0]'
 
 Fe = 24000; % Fréquence d'échantillonnage
 Te = 1/Fe; % Période d'échantillonnage
@@ -23,7 +24,7 @@ An = (2*bits - 1)';
 At = kron(An, [1, zeros(1, Ns-1)]);
 
 % Filtre
-T = 0:Te:(n_bits*Ns-1)*Te; % Echelle temporelle
+T = [0:(n_bits*Ns-1)]*Te; % Echelle temporelle
 h = ones(1, Ns); % Reponse impulsionnelle du filtre
 hr = h; % Reponse impulsionnelle du filtre de réception
 
@@ -43,7 +44,7 @@ figure('name', 'Implantation Optimale')
 
     % Filtre de réception
     nexttile
-    plot(z1);
+    plot([0:length(z1)-1]*Te, z1);
     %ylim([-10, 10])
     title('Signal en sortie de filtre de récéption');
     ylabel('Signal en sortie');
@@ -52,20 +53,49 @@ figure('name', 'Implantation Optimale')
     % Reponse impulsionnelle de g
     g = conv(h,hr);
     nexttile
-    plot(g);
-    title('Réponse impulsionnelle totale');
+    plot([0:length(g)-1]*Te, g);
+    title('Réponse impulsionnelle globale');
     xlabel('Temps (s)')
 
     % Diagramme de l'oeil
     nexttile
     plot(reshape(z1,Ns,length(z1)/Ns));
     title('Diagramme de l''oeil');
-    xlabel('Temps (s)')
+
+% 2. Modification des instants d'échantillonnage
+figure('name', 'Modification des instants d''échantillonnage')
+n0 = 3;
+echantillonBis = z1(n0:Ns:end);
+
+bits_sortie1Bis = (sign(echantillonBis) + 1) / 2;
+TEB_1Bis = sum(bits_sortie1Bis' ~= bits) / n_bits;
+
+    nexttile
+    stem(T,At)
+    ylim([-1.5, 1.5])
+    hold on
+    stem(T, kron((2*bits_sortie1 - 1), [1, zeros(1, Ns-1)]))
+    hold off
+    xlabel("temps (s)")
+    ylabel("Signal temporel")
+    title('Comparaison des bits pour l''implantation optimale');
+    legend('Bits de départ', 'Bits d''arrivée');
+
+    nexttile
+    stem(T,At)
+    ylim([-1.5, 1.5])
+    hold on
+    stem(T, kron((2*bits_sortie1Bis - 1), [1, zeros(1, Ns-1)]))
+    hold off
+    xlabel("temps (s)")
+    ylabel("Signal temporel")
+    title('Comparaison des bits pour instants d''échantillonnage modifiés');
+    legend('Bits de départ', 'Bits d''arrivée');
 
 
 % 3.2 Etude avec canal de propagation sans bruit
 % Filtre
-BW = 8000;
+BW = 1000;
 
 ordre = 61;
 hc = 2*(BW/Fe) * sinc(2*BW/Fe*(-(ordre-1)/2:1:(ordre-1)/2)); % Filtre du canal
@@ -73,23 +103,35 @@ hc = 2*(BW/Fe) * sinc(2*BW/Fe*(-(ordre-1)/2:1:(ordre-1)/2)); % Filtre du canal
 z2 = filter(hr, 1, filter(hc, 1,x));
 
 % Echantillonnage et detecteur à seuil
-n0 = Ns;
+n0 = floor(Ns/2);
 echantillon = z2(n0:Ns:end);
 
-bits_sortie = (sign(echantillon) + 1) / 2;
-TEB_2 = sum(bits_sortie' ~= bits) / n_bits;
+bits_sortie2 = (sign(echantillon) + 1) / 2;
+TEB_2 = sum(bits_sortie2' ~= bits) / n_bits;
 
 figure('name', 'Canal de propagation sans bruit')
+    
+    nexttile
+    stem(T,At)
+    ylim([-1.5, 1.5])
+    hold on
+    stem(T, kron((2*bits_sortie2 - 1), [1, zeros(1, Ns-1)]))
+    hold off
+    xlabel("temps (s)")
+    ylabel("Signal temporel")
+    title('Comparaison des bits pour l''implantation optimale');
+    legend('Bits de départ', 'Bits d''arrivée');
+
     % Reponse impulsionnelle de g
     g = conv(conv(h,hc), hr);
     nexttile
-    plot(g);
+    plot([0:length(g)-1]*Te, g);
     title('Réponse impulsionnelle totale');
     xlabel('Temps (s)')
 
     % Diagramme de l'oeil
     nexttile
-    plot(reshape(z2,Ns,length(z2)/Ns));
+    plot([0:Ns-1]*Te, reshape(z2,Ns,length(z2)/Ns));
     title('Diagramme de l''oeil');
     xlabel('Temps (s)')
 
@@ -99,9 +141,9 @@ figure('name', 'Canal de propagation sans bruit')
     Hr = fft(hr);
 
     nexttile
-    plot(abs(H .* Hr));
+    plot(linspace(-Fe/2, Fe/2, length(H)), abs(H .* Hr));
     hold on
-    plot(abs(Hc));
+    plot(linspace(-Fe/2, Fe/2, length(Hc)), abs(Hc));
     hold off
     title('Réponses en fréquence du filtre');
     xlabel('Fréquance (Hz)')
