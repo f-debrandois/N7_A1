@@ -43,7 +43,6 @@ n0 = Ns;            % Choix du t0 pour respecter le critère de Nyquist
     nexttile
     plot(reshape(z1,Ns,length(z1)/Ns));
     title('Diagramme de l''oeil');
-    xlabel('Temps (s)')
 
     fprintf("TEB chaine 1 : " + TEB1 + "\n");
 
@@ -80,12 +79,10 @@ end
     nexttile
     plot(reshape(z1_bruit(1, :),Ns,length(z1_bruit(1, :))/Ns));
     title('Diagramme de l''oeil pour Eb/N0 = 1');
-    xlabel('Temps (s)')
 
     nexttile
     plot(reshape(z1_bruit(9, :),Ns,length(z1_bruit(9, :))/Ns));
     title('Diagramme de l''oeil pour Eb/N0 = 8');
-    xlabel('Temps (s)')
 
     % TEB Obtenu et théorique
     nexttile
@@ -124,7 +121,6 @@ n0 = floor(Ns/2);            % Choix du t0 pour respecter le critère de Nyquist
     nexttile
     plot(reshape(z2,Ns,length(z2)/Ns));
     title('Diagramme de l''oeil');
-    xlabel('Temps (s)')
 
     fprintf("TEB chaine 2 : " + TEB2 + "\n");
    
@@ -161,12 +157,10 @@ end
     nexttile
     plot(reshape(z2_bruit(1, :),Ns,length(z2_bruit(1, :))/Ns));
     title('Diagramme de l''oeil pour Eb/N0 = 1');
-    xlabel('Temps (s)')
 
     nexttile
     plot(reshape(z2_bruit(9, :),Ns,length(z2_bruit(9, :))/Ns));
     title('Diagramme de l''oeil pour Eb/N0 = 8');
-    xlabel('Temps (s)')
 
     % TEB Obtenu et théorique
     nexttile
@@ -215,7 +209,6 @@ n0 = Ns;            % Choix du t0 pour respecter le critère de Nyquist
     nexttile
     plot(reshape(z3,Ns,length(z3)/Ns));
     title('Diagramme de l''oeil');
-    xlabel('Temps (s)')
 
     fprintf("TEB chaine 3 : " + TEB3 + "\n");
 
@@ -259,12 +252,10 @@ end
     nexttile
     plot(reshape(z3_bruit(1, :),Ns,length(z3_bruit(1, :))/Ns));
     title('Diagramme de l''oeil pour Eb/N0 = 1');
-    xlabel('Temps (s)')
 
     nexttile
     plot(reshape(z3_bruit(9, :),Ns,length(z3_bruit(9, :))/Ns));
     title('Diagramme de l''oeil pour Eb/N0 = 8');
-    xlabel('Temps (s)')
 
     % TEB Obtenu et théorique
     nexttile
@@ -307,3 +298,6 @@ figure('name', "Comparaison des chaines de transmission implantées")
     ylabel("TEB")
 
     % Efficacité de puissance chaines 1 et 3
+    nexttile
+    plot(TEB1_bruit)
+

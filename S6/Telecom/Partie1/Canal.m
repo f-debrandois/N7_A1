@@ -8,7 +8,6 @@ clear all ; close all;
 % Constantes
 n_bits = 1000; % Nombre de bits
 bits = randi([0 1], n_bits, 1); % Bits à transmettre
-%bits = [0     1     1     1     0     1     0     1     1     0]'
 
 Fe = 24000; % Fréquence d'échantillonnage
 Te = 1/Fe; % Période d'échantillonnage
@@ -26,7 +25,7 @@ At = kron(An, [1, zeros(1, Ns-1)]);
 % Filtre
 T = [0:(n_bits*Ns-1)]*Te; % Echelle temporelle
 h = ones(1, Ns); % Reponse impulsionnelle du filtre
-hr = fliplr(h); % Reponse impulsionnelle du filtre de réception
+hr = h; % Reponse impulsionnelle du filtre de réception
 
 x = filter(h, 1, At);
 z1 = filter(hr, 1,x);
@@ -45,7 +44,6 @@ figure('name', 'Implantation Optimale')
     % Filtre de réception
     nexttile
     plot([0:length(z1)-1]*Te, z1);
-    %ylim([-10, 10])
     title('Signal en sortie de filtre de récéption');
     ylabel('Signal en sortie');
     xlabel('Temps (s)')
@@ -95,12 +93,13 @@ TEB_1Bis = sum(bits_sortie1Bis' ~= bits) / n_bits;
 
 % 3.2 Etude avec canal de propagation sans bruit
 % Filtre
-BW = 8000;
+BW = 1000;
 
 ordre = 101;
-hc = 2*(BW/Fe) * sinc(2*BW/Fe*(-(ordre-1)/2:1:(ordre-1)/2)); % Filtre du canal
-r2 = filter(hc, 1,x);
+hc = 2*(BW/Fe) * sinc(2*(BW/Fe)*(-(ordre-1)/2:1:(ordre-1)/2)); % Filtre du canal
+r2 = filter(hc, 1, [x zeros(1, (ordre-1)/2)]);
 z2 = filter(hr, 1, r2);
+z2 = z2((ordre-1)/2 + 1 : end);
 
 % Echantillonnage et detecteur à seuil
 n0 = Ns;
@@ -133,7 +132,6 @@ figure('name', 'Canal de propagation sans bruit')
     nexttile
     plot(reshape(z2,Ns,length(z2)/Ns));
     title('Diagramme de l''oeil');
-    xlabel('Temps (s)')
 
     % Réponses en fréquence
     H = fft(h, 1024);
@@ -146,5 +144,5 @@ figure('name', 'Canal de propagation sans bruit')
     plot(linspace(-Fe/2, Fe/2, 1024), fftshift(abs(Hc)/ max(abs(Hc))));
     hold off
     title('Réponses en fréquence du filtre');
-    xlabel('Fréquance (Hz)')
+    xlabel('Fréquence (Hz)')
     legend('H * Hr', 'Hc');
