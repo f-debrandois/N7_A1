@@ -26,7 +26,7 @@ At = kron(An, [1, zeros(1, Ns-1)]);
 % Filtre
 T = [0:(n_bits*Ns-1)]*Te; % Echelle temporelle
 h = ones(1, Ns); % Reponse impulsionnelle du filtre
-hr = h; % Reponse impulsionnelle du filtre de réception
+hr = fliplr(h); % Reponse impulsionnelle du filtre de réception
 
 x = filter(h, 1, At);
 z1 = filter(hr, 1,x);
@@ -95,15 +95,15 @@ TEB_1Bis = sum(bits_sortie1Bis' ~= bits) / n_bits;
 
 % 3.2 Etude avec canal de propagation sans bruit
 % Filtre
-BW = 1000;
+BW = 8000;
 
-ordre = 61;
+ordre = 101;
 hc = 2*(BW/Fe) * sinc(2*BW/Fe*(-(ordre-1)/2:1:(ordre-1)/2)); % Filtre du canal
-
-z2 = filter(hr, 1, filter(hc, 1,x));
+r2 = filter(hc, 1,x);
+z2 = filter(hr, 1, r2);
 
 % Echantillonnage et detecteur à seuil
-n0 = floor(Ns/2);
+n0 = Ns;
 echantillon = z2(n0:Ns:end);
 
 bits_sortie2 = (sign(echantillon) + 1) / 2;
@@ -131,19 +131,19 @@ figure('name', 'Canal de propagation sans bruit')
 
     % Diagramme de l'oeil
     nexttile
-    plot([0:Ns-1]*Te, reshape(z2,Ns,length(z2)/Ns));
+    plot(reshape(z2,Ns,length(z2)/Ns));
     title('Diagramme de l''oeil');
     xlabel('Temps (s)')
 
     % Réponses en fréquence
-    H = fft(h);
-    Hc = fft(hc);
-    Hr = fft(hr);
+    H = fft(h, 1024);
+    Hc = fft(hc, 1024);
+    Hr = fft(hr, 1024);
 
     nexttile
-    plot(linspace(-Fe/2, Fe/2, length(H)), abs(H .* Hr));
+    plot(linspace(-Fe/2, Fe/2, 1024), fftshift(abs(H .* Hr)/ max(abs(H .* Hr))));
     hold on
-    plot(linspace(-Fe/2, Fe/2, length(Hc)), abs(Hc));
+    plot(linspace(-Fe/2, Fe/2, 1024), fftshift(abs(Hc)/ max(abs(Hc))));
     hold off
     title('Réponses en fréquence du filtre');
     xlabel('Fréquance (Hz)')
