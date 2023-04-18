@@ -109,6 +109,7 @@ switch v
         t_v = cputime-t_v;
 
         % WB valeurs propres
+        
         WB = diag(DB);
         
         if(flagB == 0)
