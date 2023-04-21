@@ -29,7 +29,7 @@ function [ V, D, it, flag ] = subspace_iter_v0( A, m, eps, maxit )
 
     % on génère un ensemble initial de m vecteurs orthogonaux
     % ...
-    V = 5*randn(n, m);
+    V = randn(n, m);
     V = mgs(V);
 
     % rappel : conv = invariance du sous-espace V : ||AV - VH||/||A|| <= eps
@@ -39,16 +39,16 @@ function [ V, D, it, flag ] = subspace_iter_v0( A, m, eps, maxit )
         
         % calcul de Y = A.V
         % ...
-        Y = A * V;
+        Y = A*V;
         
         % calcul de H, le quotient de Rayleigh H = V^T.A.V
         % ...
-        H = V' * Y;
+        H = V'*Y;
         
         % vérification de la convergence
         % ...
-        % ...
-        conv = norm(Y - V * H, 'fro')/normA < eps;
+        conv = norm(Y - V*H, 'fro') / norm(A, 'fro') < eps;
+
         
         % orthonormalisation
         % ...
@@ -58,21 +58,20 @@ function [ V, D, it, flag ] = subspace_iter_v0( A, m, eps, maxit )
 
     % décomposition spectrale de H, le quotient de Rayleigh
     % ...
-    [Vh, W] = eig(H);
+    [VH, W] = eig(H);
     
     % on range les valeurs propres dans l'ordre décroissant
     % ...
     [W, indices] = sort(diag(W), 'descend');
-
+    
     % on permute les vecteurs propres en conséquence
     % ...
-    Vh = Vh(:,indices);
+    VH = VH(:,indices);
     
     % les m vecteurs propres dominants de A sont calculés à partir de ceux de H
     % ...
-    V = V * Vh; 
-    it = k;
-
+    V = V * VH;
+    
     D = diag(W);
         
     it = k;

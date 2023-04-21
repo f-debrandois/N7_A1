@@ -25,11 +25,9 @@ genere = 1;
 m = 50;
 percentage = 0.4;
 
-% on génère la matrice (1) ou on lit dans un fichier (0)
-genere = 0;
-
 % tolérance
 eps = 1e-8;
+
 % nombre d'itérations max pour atteindre la convergence
 maxit = 10000;
 
@@ -43,6 +41,9 @@ fprintf('Qualité des valeurs propres (par rapport au spectre de la matrice) = [
 
 % méthode de calcul
 v = 12; % basic power method
+
+% on génère la matrice (1) ou on lit dans un fichier (0)
+genere = 0;
 
 [W, V, flag, q, qv] = eigen_2023(imat, n, v, m, eps, maxit, percentage, [], genere);
 

@@ -78,8 +78,6 @@ percentage = 0.995;
 % p pour les versions 2 et 3 (attention p déjà utilisé comme taille)
 puiss = 1;
 
-% rang de l'approximation k
-k = 0;
 
 %%%%%%%%%%%%%
 % À COMPLÉTER
@@ -100,50 +98,72 @@ end
     [WA, indices] = sort(diag(DA), 'descend');
     VA = VA(:, indices);
 
-    % power
-    [VA, DA, ~, ~, ~ ] = power_v12(M, search_space, percentage, eps, maxit);
-    WA = diag(DA);
+%     % power
+%     [VA, DA, ~, ~, ~ ] = power_v12(M, search_space, percentage, eps, maxit);
+%     WA = diag(DA);
+% 
+%     % subspace_V0
+%     [VA, DA, ~, ~] = subspace_iter_v0(M, search_space, eps, maxit);
+%     WA = diag(DA);
+% 
+%     % subspace_V1
+%     [VA, DA, ~, ~, ~, ~] = subspace_iter_v1(M, search_space, percentage, eps, maxit);
+%     WA = diag(DA);
+% 
+%     % subspace_V2
+%     [VA, DA, ~, ~, ~, ~] = subspace_iter_v2(M, search_space, percentage, puiss, eps, maxit);
+%     WA = diag(DA);
+% 
+%     % subspace_V3
+%     [VA, DA, ~, ~, ~, ~ ] = subspace_iter_v3(M, search_space, percentage, puiss, eps, maxit);
+%     WA = diag(DA);
 
-    % subspace_V0
-    [VA, DA, ~, ~] = subspace_iter_v0(M, search_space, eps, maxit);
-    WA = diag(DA);
-
-    % subspace_V1
-    [VA, DA, ~, ~, ~, ~] = subspace_iter_v1(M, search_space, percentage, eps, maxit);
-    WA = diag(DA);
-
-    % subspace_V2
-    [VA, DA, ~, ~, ~, ~] = subspace_iter_v2(M, search_space, percentage, puiss, eps, maxit);
-    WA = diag(DA);
-
-    % subspace_V3
-    [VA, DA, ~, ~, ~, ~ ] = subspace_iter_v3(M, search_space, percentage, puiss, eps, maxit);
-    WA = diag(DA);
-
-Uk = zeros(q, k);
-Vk = zeros(p, k);
+U_k = zeros(q, m);
+V_k = zeros(p, m);
 if (p < q)
-    Uk = VA;
+    U_k = VA(:, 1:k);
 else
-    Vk = VA;
+    V_k = VA(:, 1:k);
 end
 
 %% calcul des valeurs singulières
 % TODO
-sigI = sqrt(WA);
+Sigma_k = diag(sqrt(WA(1:m)));
 
 %% calcul de l'autre ensemble de vecteurs
 % TODO
 if (p < q)
-    Vk = (1/sigI) * I' * Uk;
+    for i = 1:m
+        V_k(:, i) = (1/Sigma_k(i, i)) * I' * U_k(:, i);
+    end  
 else
-    Uk = VA;
+    for i = 1:m
+        U_k(:, i) = (1/Sigma_k(i, i)) * I * V_k(:, i);
+    end  
 end
-
 
 
 %% calcul des meilleures approximations de rang faible
 
-for k = 1 %...
-% TODO
+DifferenceSVD_bis = zeros(size(inter, 2), 1);
+% images reconstruites en utilisant de 1 à 200 vecteurs (avec un pas de 40)
+ti = 0;
+td = 0;
+for k = inter
+
+    % Calcul de l'image de rang k
+    Im_k = U_k(:, 1:k)*Sigma_k(1:k, 1:k)*V_k(:, 1:k)';
+
+    % Affichage de l'image reconstruite
+    ti = ti+1;
+    figure(ti)
+    colormap('gray')
+    imagesc(Im_k)
+    
+    % Calcul de la différence entre les 2 images
+    td = td + 1;
+    differenceSVD_bis(td) = sqrt(sum(sum((I-Im_k).^2)));
+    pause
 end
+
+ 

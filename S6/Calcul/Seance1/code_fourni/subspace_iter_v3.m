@@ -11,8 +11,8 @@
 % maxit      : nombre maximum d'itérations de la méthode
 
 % Résultats
-% W : vecteur contenant les valeurs propres (ordre décroissant)
-% V : matrice des vecteurs propres correspondant
+% V : matrice des vecteurs propres
+% D : matrice diagonale contenant les valeurs propres (ordre décroissant)
 % n_ev : nombre de couples propres calculées
 % it : nombre d'itérations de la méthode
 % itv  : nombre d'itérations pour chaque couple propre
@@ -21,7 +21,7 @@
     %  flag = 1  : on converge en ayant atteint la taille maximale de l'espace
     %  flag = -3 : on n'a pas convergé en maxit itérations
 
-function [ W, V, n_ev, it, itv, flag ] = subspace_iter_v3( A, m, percentage, p, eps, maxit )
+function [ V, D, n_ev, it, itv, flag ] = subspace_iter_v3( A, m, percentage, p, eps, maxit )
 
     % calcul de la norme de A (pour le critère de convergence d'un vecteur (gamma))
     normA = norm(A, 'fro');
@@ -49,26 +49,25 @@ function [ W, V, n_ev, it, itv, flag ] = subspace_iter_v3( A, m, percentage, p, 
     % on génère un ensemble initial de m vecteurs orthogonaux
     Vr = randn(n, m);
     Vr = mgs(Vr);
-    Vnc = Vr;
-    Ap = A^p;
-    Wr = zeros(m, 1);
-    Yc = [];
+
     % rappel : conv = (eigsum >= trace) | (nb_c == m)
-    while (~conv & k < maxit),
+    while (~conv && k < maxit)
         
         k = k+1;
-        %% Y <- A*V
-        Y = Ap*Vnc;
-        
-        %% orthogonalisation
-        Vnc = mgs([Yc Y]);
+        Vnc = Vr(:, nb_c+1 : end);
 
-        Vnc = Vnc(:, nb_c+1:end);
+        %% Y <- A*V
+        Vnc = A * Vnc;
+        Vr(:, nb_c+1 : end) = Vnc;
+        
+
+        %% orthogonalisation
+        Vr = mgs_block(Vr, nb_c);
+        Vnc = Vr(:, nb_c+1 : end);
         
         %% Projection de Rayleigh-Ritz
-        [Wnc, Vnc] = rayleigh_ritz_projection(A, Vnc);
-        Vr(:, nb_c+1:end) = Vnc;
-        Wr(nb_c+1:end) = Wnc;
+        [Wr, Vnc] = rayleigh_ritz_projection(A, Vnc);
+        
         %% Quels vecteurs ont convergé à cette itération
         analyse_cvg_finie = 0;
         % nombre de vecteurs ayant convergé à cette itération
@@ -76,7 +75,7 @@ function [ W, V, n_ev, it, itv, flag ] = subspace_iter_v3( A, m, percentage, p, 
         % nb_c est le dernier vecteur à avoir convergé à l'itération précédente
         i = nb_c + 1;
         
-        while(~analyse_cvg_finie),
+        while(~analyse_cvg_finie)
             % tous les vecteurs de notre sous-espace ont convergé
             % on a fini (sans avoir obtenu le pourcentage)
             if(i > m)
@@ -98,10 +97,7 @@ function [ W, V, n_ev, it, itv, flag ] = subspace_iter_v3( A, m, percentage, p, 
                     % un de plus
                     nbc_k = nbc_k + 1;
                     % on le stocke ainsi que sa valeur propre
-                    W(i) = Wnc(nbc_k);
-                    Wr(i) = Wnc(nbc_k);
-                    Vr(:, i) = Vnc(:, nbc_k);
-                    Yc = [Yc Y(:, nbc_k)];
+                    W(i) = Wr(i);
                     
                     itv(i) = k;
                     
@@ -120,10 +116,8 @@ function [ W, V, n_ev, it, itv, flag ] = subspace_iter_v3( A, m, percentage, p, 
             end
         end
         
-        Vnc = Vnc(:, (nbc_k+1): end);
         % on met à jour le nombre de vecteurs ayant convergés
         nb_c = nb_c + nbc_k;
-        
         
         % on a convergé dans l'un de ces deux cas
         conv = (nb_c == m) | (eigsum >= vtrace);
@@ -135,10 +129,11 @@ function [ W, V, n_ev, it, itv, flag ] = subspace_iter_v3( A, m, percentage, p, 
         n_ev = nb_c;
         V = Vr(:, 1:n_ev);
         W = W(1:n_ev);
+        D = diag(W);
         it = k;
     else
         % on n'a pas convergé
-        W = zeros(1,1);
+        D = zeros(1,1);
         V = zeros(1,1);
         n_ev = 0;
         it = k;
