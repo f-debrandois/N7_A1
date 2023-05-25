@@ -54,8 +54,8 @@ figure('name', 'Etude théorique')
 
     % Diagramme de l'oeil
     nexttile
-    d = kron(y, ones(2, 1));
-    plot(reshape(d(2:end-1),2, (length(y)-2)/2))
+    y = kron(y, ones(2, 1));
+    plot(reshape(y(2:end-1),2, (length(y)-2)/2))
     title('Diagramme de l''oeil')
 
 
@@ -120,6 +120,7 @@ r = filter(hc, 1, x);
     % Constellation
     nexttile
     echantillon = z2(n0:Ns:end);
+    %scatter(real(sign(echantillon)), imag(sign(echantillon)))
     plot(echantillon(2:end), zeros(1, n_bits-1),'*')
     title('Constellation obtenue en réception')
 
@@ -193,7 +194,7 @@ figure('name', 'Egalisation ZFE')
     Y0 = [1 zeros(1,n_bits)]';
     Ze = toeplitz([alpha0 alpha1 zeros(1,n_bits-1)], [alpha0 zeros(1,n_bits)]);
     C = Ze\Y0;
-    disp("Preimers coefficients de l'égalisateur ZFE")
+    disp("Premiers coefficients de l'égalisateur ZFE")
     disp(C(1:10)')
 
     % Tracé des réponses en fréquence
@@ -295,7 +296,7 @@ figure('name', 'Egalisation MMSE')
     Ra = xcorr(Xe, An(end:-1:1))';
     C = inv(Rz)*Ra;
 
-    disp("Preimers coefficients de l'égalisateur MMSE")
+    disp("Premiers coefficients de l'égalisateur MMSE")
     disp(C(1:10)')
 
     % Tracé des réponses en fréquence
