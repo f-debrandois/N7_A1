@@ -1,8 +1,7 @@
 % Projet de Telecommunication : Introduction à l'égalisation
 % Nom / Prénom : Foucher de Brandois Félix
-% Nom / Prénom : Fraine Sofiane
 % Nom / Prénom : Alioui Ilyasse
-% Groupe : 1SN-EF
+% Groupe : 1SN-E
 
 clear all ; close all;
 
@@ -55,8 +54,8 @@ figure('name', 'Etude théorique')
 
     % Diagramme de l'oeil
     nexttile
-    y = kron(y, ones(2, 1));
-    plot(reshape(y(2:end-1),2, (length(y)-2)/2))
+    d = kron(y, ones(2, 1));
+    plot(reshape(d(2:end-1),2, (length(y)-2)/2))
     title('Diagramme de l''oeil')
 
 
@@ -293,13 +292,10 @@ figure('name', 'Egalisation MMSE')
     Xe = [alpha0 alpha1 zeros(1,n_bits-2)];
     rz = xcorr(Xe, Xe);
     Rz = toeplitz(rz, rz);
-    Ra = xcorr(Xe, An(end:-1:1));
+    Ra = xcorr(Xe, An(end:-1:1))';
     C = inv(Rz)*Ra;
 
-    Y0 = [1 zeros(1,n_bits)]';
-    Ze = toeplitz([alpha0 alpha1 zeros(1,n_bits-1)], [alpha0 zeros(1,n_bits)]);
-    %C = inv(Ze'*Ze)*Ze'*Y0;
-    disp("Preimers coefficients de l'égalisateur ZFE")
+    disp("Preimers coefficients de l'égalisateur MMSE")
     disp(C(1:10)')
 
     % Tracé des réponses en fréquence
@@ -338,12 +334,12 @@ figure('name', 'Egalisation MMSE')
 
     % Comparaison des constellations
     nexttile
-    z3 = filter(hr, 1, r);
-    echantillon = z3(n0:Ns:end);
-    y1 = filter(C, 1, echantillon);
+    z4 = filter(hr, 1, r);
+    echantillon = z4(n0:Ns:end);
+    y2 = filter(C, 1, echantillon);
     plot(echantillon(2:end), zeros(1, n_bits-1),'*')
     hold on
-    plot(y1(2:end), zeros(1, n_bits-1),'*')
+    plot(y2(2:end), zeros(1, n_bits-1),'*')
     hold off
     title('Constellation obtenue avant et après égalisateur')
     legend("Avant égalisateur","Après égalisateur")
