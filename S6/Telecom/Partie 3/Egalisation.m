@@ -29,7 +29,7 @@ figure('name', 'Etude théorique')
     xe2 = 0.5*xe1;
     
     nexttile
-    plot([0 : 5], xe1)
+    plot(0 : 5, xe1)
     ylim([-1.5, 1.5])
     hold on
     plot(xe2)
@@ -38,18 +38,18 @@ figure('name', 'Etude théorique')
     ylabel("Signal temporel")
     title('Décomposition du signal de réception')
     legend('x(t)', '0.5 * x(t - Ts)')
-    xticks([1 : 6])
+    xticks(1 : 6)
     xticklabels("Ts")
     grid on;
     
     nexttile
     y = [xe1; 0] + [0; xe2];
-    plot([0 : 6], y)
+    plot(0 : 6, y)
     ylim([-2, 2])
     xlabel("temps (s)")
     ylabel("Signal temporel")
     title('Décomposition du signal de réception')
-    xticks([1 : 6])
+    xticks(1 : 6)
     xticklabels("Ts")
     grid on;
 
@@ -77,6 +77,7 @@ An = (2*bits - 1)';
 At = [kron(An, [1, zeros(1, Ns-1)])];
 
 x = filter(h, 1, At);
+r = filter(hc, 1, x);
 
 % Sans Canal
     z1 = filter(hr, 1, x);
@@ -99,7 +100,7 @@ x = filter(h, 1, At);
     legend('Bits de départ', 'Bits d''arrivée')
 
 % Avec Canal
-    z2 = filter(hr, 1, filter(hc, 1, x));
+    z2 = filter(hr, 1, r);
 
     % Signal de sortie
     nexttile
@@ -113,7 +114,8 @@ x = filter(h, 1, At);
     
     % Diagramme de l'oeil
     nexttile
-    plot(reshape(z2,Ns,length(z2)/Ns));
+    d = reshape(z2,Ns,length(z2)/Ns);
+    plot(d(:,2:end));
     title('Diagramme de l''oeil')
 
     % Constellation
@@ -135,7 +137,7 @@ EbN0 = 0:10;
 TEB_bruit = zeros(1, length(EbN0));
 TEB_sans_canal = zeros(1, length(EbN0));
 Px = mean(abs(x).^2);
-r = filter(hc, 1, x);
+
 for i = 1:length(EbN0)
     for j = 1:100
 
@@ -146,10 +148,12 @@ for i = 1:length(EbN0)
         z_bruit = filter(hr, 1, r + bruit);
         z_sans_canal = filter(hr, 1, x + bruit);
     
+        % TEB chaine avec bruit
         echantillon = z_bruit(n0:Ns:end);
         bits_sortie = (sign(echantillon) + 1) / 2;
         TEB_bruit(i) = TEB_bruit(i) + (sum(bits_sortie' ~= bits) / n_bits);
     
+        % TEB chaine sans canal
         echantillon = z_sans_canal(n0:Ns:end);
         bits_sortie = (sign(echantillon) + 1) / 2;
         TEB_sans_canal(i) = TEB_sans_canal(i) + (sum(bits_sortie' ~= bits) / n_bits);
@@ -188,8 +192,8 @@ figure('name', 'Egalisation ZFE')
 % Sans Bruit
     % Determination des coefs
     Y0 = [1 zeros(1,n_bits)]';
-    Z = toeplitz([alpha0 alpha1 zeros(1,n_bits-1)], [alpha0 zeros(1,n_bits)]);
-    C = inv(Z'*Z)*Z'*Y0;
+    Ze = toeplitz([alpha0 alpha1 zeros(1,n_bits-1)], [alpha0 zeros(1,n_bits)]);
+    C = Ze\Y0;
     disp("Preimers coefficients de l'égalisateur ZFE")
     disp(C(1:10)')
 
@@ -228,49 +232,158 @@ figure('name', 'Egalisation ZFE')
     legend("sans égaliseur","avec égaliseur")
 
     % Comparaison des constellations
+    nexttile
+    z3 = filter(hr, 1, r);
+    echantillon = z3(n0:Ns:end);
+    y1 = filter(C, 1, echantillon);
+    plot(echantillon(2:end), zeros(1, n_bits-1),'*')
+    hold on
+    plot(y1(2:end), zeros(1, n_bits-1),'*')
+    hold off
+    title('Constellation obtenue avant et après égalisateur')
+    legend("Avant égalisateur","Après égalisateur")
+    grid on
+
+% Avec bruit
+TEB_bruit = zeros(1, length(EbN0));
+TEB_egalisateur = zeros(1, length(EbN0));
+Px = mean(abs(x).^2);
+
+for i = 1:length(EbN0)
+    for j = 1:100
+
+        % Création du bruit
+        sigma2 = Px*Ns/(2*10^(EbN0(i)/10));
+        bruit = sqrt(sigma2)*randn(1, Ns*n_bits);
     
+        z_bruit = filter(hr, 1, r + bruit);
+    
+        % TEB sans égalisateur
+        echantillon = z_bruit(n0:Ns:end);
+        bits_sortie = (sign(echantillon) + 1) / 2;
+        TEB_bruit(i) = TEB_bruit(i) + (sum(bits_sortie' ~= bits) / n_bits);
 
+        % TEB avec égalisateur
+        y = filter(C, 1, echantillon);
+        bits_sortie = (sign(y) + 1) / 2;
+        TEB_egalisateur(i) = TEB_egalisateur(i) + (sum(bits_sortie' ~= bits) / n_bits);
+    end
+end
+    TEB_bruit = TEB_bruit/100;
+    TEB_egalisateur = TEB_egalisateur/100;
 
-
-
-% Z = toeplitz(z_echant);
-% C = inv(Z'*Z)*Z'*Y0';
-
-% Y0 = [1 zeros(1,nb_bits-1)];
-% Z = toeplitz(z_echant);
-% C = inv(Z'*Z)*Z'*Y0';
-
-
+    % Comparaison des TEB
+    nexttile
+    semilogy(EbN0,TEB_egalisateur)
+    hold on
+    semilogy(EbN0,TEB_bruit)
+    hold off
+    title("Comparaison entre le TEB obtenu avec et sans égalisateur")
+    legend("Avec égalisateur","Sans égalisateur")
+    xlabel("Eb/N0 (en dB)")
+    ylabel("TEB")
 
 
 %% 4. Egalisation MMSE
 % 4.1 Etude à réaliser
+figure('name', 'Egalisation MMSE')
+% Sans Bruit
+    % Determination des coefs
+    %z4=[alpha0 alpha1 zeros(1,nb_bits-1)] ,[alpha0 zeros(1,nb_bits)];
+    Xe = [alpha0 alpha1 zeros(1,n_bits-2)];
+    rz = xcorr(Xe, Xe);
+    Rz = toeplitz(rz, rz);
+    Ra = xcorr(Xe, An(end:-1:1));
+    C = inv(Rz)*Ra;
 
-r = filter(hc, 1, x);
-z = filter(hr, 1, r);
+    Y0 = [1 zeros(1,n_bits)]';
+    Ze = toeplitz([alpha0 alpha1 zeros(1,n_bits-1)], [alpha0 zeros(1,n_bits)]);
+    %C = inv(Ze'*Ze)*Ze'*Y0;
+    disp("Preimers coefficients de l'égalisateur ZFE")
+    disp(C(1:10)')
 
-g = conv(h, conv(hc, hr));
+    % Tracé des réponses en fréquence
+    Hc = fft(hc,1024);
+    Heg = fft(C,1024);
+    HcHeg = Hc .* Heg;
 
-    % Signal de sortie
     nexttile
-    plot([0:29] * Te, g);
-    title('Réponse impulsionnelle globale');
-    xticks([1 : 8] * Ts - Te)
-    xticklabels("Ts")
-    xlabel("temps (s)")
-    grid on;
+    plot(linspace(-Fe/2, Fe/2, 1024), fftshift(abs(Hc)/ max(abs(Hc))))
+    title('Réponse en fréquence du filtre canal Hc')
+    xlabel('Fréquence (Hz)')
 
     nexttile
-    plot([0:n_bits*Ns - 1] * Te, z);
-    title('Signal de sortie');
-    xticks([1 : 8] * Ts - Te)
-    xticklabels("Ts")
-    xlabel("temps (s)")
-    ylabel("Signal temporel")
-    grid on;
+    plot(linspace(-Fe/2, Fe/2, 1024), fftshift(abs(Heg)/ max(abs(Heg))))
+    title('Réponses en fréquence du filtre de l''égaliseur Heg')
+    xlabel('Fréquence (Hz)')
 
+    nexttile
+    plot(linspace(-Fe/2, Fe/2, 1024), fftshift(abs(HcHeg)/ max(abs(HcHeg))))
+    title('Produit des réponses en fréquence Hc * Heg')
+    xlabel('Fréquence (Hz)')
 
+    % Tracé des réponses impulsionnelles
+    figure('name', 'Tracés')
+    g1 = conv(h,conv(hc,hr));
+    g2 = conv(g1, C);
 
+    nexttile
+    plot(g1)
+    title("Réponse impulsionnelle de la chaine de transmission avec et sans égalisateur")
+    xlabel("Temps (s)");
+    hold on
+    plot(g2(1:30))
+    hold off
+    legend("sans égaliseur","avec égaliseur")
 
+    % Comparaison des constellations
+    nexttile
+    z3 = filter(hr, 1, r);
+    echantillon = z3(n0:Ns:end);
+    y1 = filter(C, 1, echantillon);
+    plot(echantillon(2:end), zeros(1, n_bits-1),'*')
+    hold on
+    plot(y1(2:end), zeros(1, n_bits-1),'*')
+    hold off
+    title('Constellation obtenue avant et après égalisateur')
+    legend("Avant égalisateur","Après égalisateur")
+    grid on
 
+% Avec bruit
+TEB_bruit = zeros(1, length(EbN0));
+TEB_egalisateur = zeros(1, length(EbN0));
+Px = mean(abs(x).^2);
 
+for i = 1:length(EbN0)
+    for j = 1:100
+
+        % Création du bruit
+        sigma2 = Px*Ns/(2*10^(EbN0(i)/10));
+        bruit = sqrt(sigma2)*randn(1, Ns*n_bits);
+    
+        z_bruit = filter(hr, 1, r + bruit);
+    
+        % TEB sans égalisateur
+        echantillon = z_bruit(n0:Ns:end);
+        bits_sortie = (sign(echantillon) + 1) / 2;
+        TEB_bruit(i) = TEB_bruit(i) + (sum(bits_sortie' ~= bits) / n_bits);
+
+        % TEB avec égalisateur
+        y = filter(C, 1, echantillon);
+        bits_sortie = (sign(y) + 1) / 2;
+        TEB_egalisateur(i) = TEB_egalisateur(i) + (sum(bits_sortie' ~= bits) / n_bits);
+    end
+end
+    TEB_bruit = TEB_bruit/100;
+    TEB_egalisateur = TEB_egalisateur/100;
+
+    % Comparaison des TEB
+    nexttile
+    semilogy(EbN0,TEB_egalisateur)
+    hold on
+    semilogy(EbN0,TEB_bruit)
+    hold off
+    title("Comparaison entre le TEB obtenu avec et sans égalisateur")
+    legend("Avec égalisateur","Sans égalisateur")
+    xlabel("Eb/N0 (en dB)")
+    ylabel("TEB")
