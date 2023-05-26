@@ -289,13 +289,13 @@ end
 figure('name', 'Egalisation MMSE')
 % Sans Bruit
     % Determination des coefs
-    
-    % PARTIE INCOMPLETE -----------------------------------------
     echantillon = z3(n0:Ns:end);
-    Xe = [echantillon]/Ns;
-    rz = xcorr(Xe, Xe);
+    rz = xcorr(echantillon, echantillon);
+    %z4=[alpha0 alpha1 zeros(1,nb_bits-1)] ,[alpha0 zeros(1,nb_bits)];
+    %Xe = [echantillon]/Ts;
+    %rz = xcorr(Xe, Xe);
     Rz = toeplitz(rz, rz);
-    Ra = xcorr(Xe, An)';
+    Ra = xcorr(echantillon, An)';
     C = inv(Rz)*Ra;
 
     disp("Premiers coefficients de l'égalisateur MMSE")
@@ -337,7 +337,6 @@ figure('name', 'Egalisation MMSE')
 
     % Comparaison des constellations
     nexttile
-    z4 = filter(hr, 1, r);
     echantillon = z4(n0:Ns:end);
     y2 = filter(C, 1, echantillon);
     plot(echantillon(2:end), zeros(1, n_bits-1),'*')
