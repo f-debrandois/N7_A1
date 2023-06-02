@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "readcmd.h": "c"
+        "readcmd.h": "c",
+        "jobmanager.h": "c"
     }
 }
