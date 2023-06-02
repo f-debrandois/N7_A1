@@ -2,5 +2,6 @@
     "files.associations": {
         "readcmd.h": "c",
         "jobmanager.h": "c"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

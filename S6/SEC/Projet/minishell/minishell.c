@@ -9,6 +9,17 @@
 #include "readcmd.h"
 #include "jobManager.h"
 
+// Flag to track if the shell is suspended
+bool shellSuspended = false;
+
+// Signal handler for SIGTSTP (Ctrl-Z)
+void handleSIGTSTP(int signum) {
+    if (!shellSuspended) {
+        // Suspend the shell
+        printf("\nShell suspended. Type 'fg' to resume.\n");
+        shellSuspended = true;
+    }
+}
 
 // Fonctions commandes internes
 void execute_cd(char* directory) {
@@ -19,10 +30,27 @@ void execute_cd(char* directory) {
     }
 }
 
+// Commande "suspend" to suspend the minishell
+void suspendShell() {
+    if (!shellSuspended) {
+        // Suspend the shell
+        printf("\nShell suspended. Type 'fg' to resume.\n");
+        shellSuspended = true;
+        raise(SIGSTOP); // Send SIGSTOP signal to suspend the shell process
+    }
+}
+
 int main() {
 
     // Initialize the job manager
     initializeJobManager();
+
+    // Set up the SIGTSTP signal handler
+    struct sigaction sa;
+    sa.sa_handler = handleSIGTSTP;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+    sigaction(SIGTSTP, &sa, NULL);
 
     // Initialisation des variables
     struct cmdline *cmd;
@@ -47,6 +75,16 @@ int main() {
 
         // Handle null command
         if (cmd == NULL) {
+            continue;
+        }
+
+        // Handle shell suspension
+        if (shellSuspended) {
+            if (strcmp(cmd->seq[0][0], "fg") == 0) {
+                // Resume the shell
+                shellSuspended = false;
+                printf("Shell resumed.\n");
+            }
             continue;
         }
 
@@ -100,6 +138,11 @@ int main() {
                     } else {
                         printf("Erreur : fg [ID Minishell]\n");
                     }
+                    continue;
+                }
+                // Commande "suspend" to suspend the shell
+                else if (strcmp(cmd->seq[0][0], "suspend") == 0) {
+                    suspendShell();
                     continue;
                 }
             }
