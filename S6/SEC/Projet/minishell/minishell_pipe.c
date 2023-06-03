@@ -83,7 +83,7 @@ int main() {
         // Afficher le répertoire courant
         char cwd[1024];
         if (getcwd(cwd, sizeof(cwd)) != NULL) {
-            printf("\n%s >>> ", cwd);
+            printf("%s >>> ", cwd);
         } else {
             perror("getcwd() error");
             return 1;

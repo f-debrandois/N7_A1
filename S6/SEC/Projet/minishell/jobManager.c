@@ -5,25 +5,26 @@
 #include <stdbool.h>
 #include <sys/wait.h>
 #include <signal.h>
+
 #include "jobManager.h"
 
-#define MAX_JOBS 10
+#define MAX_JOBS 100
 
-// Structure to represent a job
+// Structure pour représenter un job
 typedef struct {
-    int id;                 // Job identifier
-    pid_t pid;              // Process ID of the job
-    char cmdline[1024];     // Command line of the job
-    bool active;            // Flag indicating if the job is active or suspended
+    int id;         // Identifiant du job
+    pid_t pid;      // pid du job
+    char cmdline[1024]; // Ligne de commande du job
+    bool active;    // Indicateur indiquant si le job est actif ou suspendu
 } Job;
 
-Job jobs[MAX_JOBS];         // Array to store the jobs
-int numJobs = 0;            // Number of active jobs
+Job jobs[MAX_JOBS]; // Tableau pour stocker les travaux
+int numJobs = 0; // Nombre de travaux actifs
 
-// Add a job to the list
+// Ajouter u job à la liste
 void addJob(pid_t pid, char* cmdline) {
     if (numJobs >= MAX_JOBS) {
-        printf("Maximum number of jobs reached\n");
+        printf("Nombre max de jobs atteint\n");
         return;
     }
 
@@ -36,7 +37,7 @@ void addJob(pid_t pid, char* cmdline) {
     jobs[numJobs++] = newJob;
 }
 
-// Remove a job from the list
+// Retirer un job de la liste
 void removeJob(int id) {
     for (int i = 0; i < numJobs; i++) {
         if (jobs[i].id == id) {
@@ -49,7 +50,7 @@ void removeJob(int id) {
     }
 }
 
-// List all the active jobs
+// Liste des jobs actifs
 void listJobs() {
     printf("ID shell\tPID\tStatus\tCommande\n");
     for (int i = 0; i < numJobs; i++) {
@@ -58,7 +59,7 @@ void listJobs() {
     }
 }
 
-// Suspend a job
+// Suspendre un job
 void stopJob(int id) {
     for (int i = 0; i < numJobs; i++) {
         if (jobs[i].id == id) {
@@ -67,11 +68,10 @@ void stopJob(int id) {
             return;
         }
     }
-
-    printf("Job with ID %d not found\n", id);
+    printf("%d : ID de job invalide !\n", id);
 }
 
-// Resume a suspended job
+// Reprendre un job suspendu
 void backgroundJob(int id) {
     for (int i = 0; i < numJobs; i++) {
         if (jobs[i].id == id) {
@@ -81,10 +81,10 @@ void backgroundJob(int id) {
         }
     }
 
-    printf("Job with ID %d not found\n", id);
+    printf("%d : ID de job invalide !\n", id);
 }
 
-// Bring a job to the foreground
+// Mettre un job au premier plan
 void foregroundJob(int id) {
     for (int i = 0; i < numJobs; i++) {
         if (jobs[i].id == id) {
@@ -96,10 +96,10 @@ void foregroundJob(int id) {
         }
     }
 
-    printf("Job with ID %d not found\n", id);
+    printf("%d : ID de job invalide !\n", id);
 }
 
-// Initialize the job manager
+// Initialiser le job manager
 void initializeJobManager() {
     numJobs = 0;
 }

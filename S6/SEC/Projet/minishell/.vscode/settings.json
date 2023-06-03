@@ -1,7 +1,11 @@
 {
     "files.associations": {
         "readcmd.h": "c",
-        "jobmanager.h": "c"
+        "jobmanager.h": "c",
+        "unistd.h": "c",
+        "new": "c",
+        "sigaction.h": "c",
+        "fcntl.h": "c"
     },
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "enabled"
 }
