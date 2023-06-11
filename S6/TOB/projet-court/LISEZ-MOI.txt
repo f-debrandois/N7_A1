@@ -1,0 +1,65 @@
+Nom       : Foucher de Brandois
+Prénom    : Félix
+Groupe TP : E
+
+Les « ... » indiquent les endroits à compléter.
+
+=====[ Temps passé ]============================================================
+
+Ces informations de temps sont demandées à titre indicatif et ne sont pas
+prises en compte dans la notation du projet.
+
+
+* Temps passé sur la V1 : 15 heures 0 minutes
+* Temps passé sur la V2 : ... heures ... minutes
+
+Pour la V2 on ne tiendra pas compte du temps passé sur la V1.
+
+
+=====[ Questions ]==============================================================
+
+--------------------------------------------------------------------------------
+Pourquoi l'exception OperationInterditeException ne peut pas être définie
+comme vérifiée par le compilateur ?
+--------------------------------------------------------------------------------
+
+OperationInterditeException ne peut pas être définie comme vérifiée par le compilateur car sinon, il faudrait
+ajouter cette exception dans les exceptions levées par la fonction retirer définie dans Jeu.
+Or, si on définit la fonction retirer comme tel, n'importe quelle personne qui appelle la fonction retirer peut
+l'entourer avec un try / catch, et ainsi passer outre la procuration.
+
+--------------------------------------------------------------------------------
+Expliquer ce qu'il faut faire pour ajouter un nouveau niveau de jeu, par
+exemple la stratégie lente (C13).  Pour plus de précision, on numérotera
+les étapes à faire.
+--------------------------------------------------------------------------------
+
+1. Dans une nouvelle classe qui implémente l'interface Strategie, décrire le comportement associé à la stratégie à ajouter.
+2. Dans la classe Jouer, ajouter le nom de la stratégie aux stratégies disponibles dans la fonction verifierNomStrategie (ligne 112)
+	en suivant l'expemple des stratégies déjà disponibles :
+	- ajouter la stratégie en string en cas possible dans le switch
+	- associer strat à un nouvel objet de la nouvelle classe
+	- écrire break
+
+--------------------------------------------------------------------------------
+Expliquer ce qui permet, dans votre conception, de changer dynamiquement
+(en cours d'exécution du programme) la stratégie d'un joueur (C14).
+--------------------------------------------------------------------------------
+
+Le fonction setStrategie de la classe Joueur permet de modifier la stratégie d'un joueur.
+Ainsi, si l'on cherche à modifier la stratégie en jeu, on peut ajouter une requète qui demande à l'utilisateur si il souhaite changer de stratégie.
+Ensuite, on lui demande d'écrire en lettre sa stratégie.
+Puis, on vérifie si la nouvelle stratégie fait bien partie de la liste des stratégies disponibles.
+Enfin, on affecte la nouvelle stratégie au joueur.
+
+
+=====[ Explications ]===========================================================
+
+--------------------------------------------------------------------------------
+Donner ici les explications supplémentaires utiles à la compréhension du
+travail rendu.
+--------------------------------------------------------------------------------
+
+...
+
+--------------------------------------------------------------------------------

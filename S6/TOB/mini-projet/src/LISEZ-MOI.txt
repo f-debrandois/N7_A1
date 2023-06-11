@@ -1,0 +1,39 @@
+Nom       : Foucher de Brandois
+Prénom    : Félix
+Groupe TP : E
+
+
+Consigne :  Ci-dessous, répondre à la place des « ... ».
+
+
+=====[ Temps ]==================================================================
+
+Temps passé sur la V1 : 8 heures 0 minutes
+Temps passé sur la V2 : ... heures ... minutes
+Pour la V2 on ne tiendra pas compte du temps passé sur la V1.
+Bien sûr, les temps renseignés ici ne sont pas pris en compte dans la notation.
+
+
+=====[ Questions ]==============================================================
+
+Indiquer la relation UML entre Cercle et le Point centre du cercle.
+-------------------------------------------------------------------
+
+Un cercle est constitué d'un centre défini par un Point et un rayon.
+La classe Cercle contient donc une autre classe, la classe Point et ne peut exister sans elle.
+C'est donc une relation de Composition.
+
+
+Comment est réalisée l'exigence E18 ?
+-------------------------------------
+
+Pour changer les caractéristiques d'un cercle uniquement par des opérations de modification proposées par la classe, on fixe ses paramètres (centre, rayon et couleur) en privé.
+
+
+
+=====[ Explications ]===========================================================
+
+(Facultatif) Donner ici les explications supplémentaires utiles à la
+compréhension du travail rendu.
+
+...
