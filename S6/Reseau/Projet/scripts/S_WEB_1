@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Activer les interfaces
+ip link set dev eth0 up
+
+# Configurer l'interfaces
+ip addr add 192.168.144.10/25 dev eth0
+
+# Configurer la passerelle par defaut
+ip route add default via 192.168.144.1
+
+# Activer le service Server WEB
+service apache2 start

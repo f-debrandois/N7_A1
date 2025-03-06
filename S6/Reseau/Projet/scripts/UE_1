@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Activer les interfaces
+ip link set dev eth0 up
+
+# Configurer les interfaces
+dhclient eth0
+

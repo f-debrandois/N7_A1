@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Activer les interfaces
+ip link set dev eth0 up
+ip link set dev eth1 up
+
+# Configurer les interfaces
+ip addr add 1.46.97.196/26 dev eth0
+ip addr add 1.46.97.132/26 dev eth1
+
+# Activer le routage
+echo 1 >/proc/sys/net/ipv4/ip_forward

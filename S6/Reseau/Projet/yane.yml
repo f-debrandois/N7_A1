@@ -1,0 +1,79 @@
+network:
+  name: ProjetReseau
+  version: 0.1
+  hosts:
+    - UE_1
+      mode : netns
+      init : ./scripts/UE_1
+ 
+    - S_WEB_1
+      mode : docker
+      image : apache_n7:latest
+      files : ./files/S_WEB_1/var:/
+ 
+ 
+    - BOX_1
+      mode : docker
+      image : dhcp_n7:latest
+      files : ./files/BOX_1/etc:/
+ 
+    - UE_2
+      mode : netns
+      init : ./scripts/UE_2
+ 
+    - BOX_2
+      mode : docker
+      image : dhcp_n7:latest
+      files : ./files/BOX_2/etc:/
+ 
+ 
+    - R_access
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/R_access/etc:/
+ 
+ 
+    - R1
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/R1/etc:/
+ 
+ 
+    - R2
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/R2/etc:/
+ 
+    - R_services
+      mode : docker
+      image : quagga_n7:latest
+      files : ./files/R_services/etc:/
+ 
+ 
+    - S_WEB_2
+      mode : docker
+      image : apache_n7:latest
+      files : ./files/S_WEB_2/var:/
+ 
+    - S_DNS
+      mode : docker
+      image : dns_n7:latest
+      files : ./files/S_DNS/etc:/
+ 
+  links :
+    - UE_2:eth0!BOX_2:eth0
+ 
+  bridges:
+    - Switch0
+      interfaces: BOX_1:eth0!UE_1:eth0!S_WEB_1:eth0!
+    - Switch1
+      interfaces: R_access:eth0!BOX_2:eth1!BOX_1:eth1!
+    - Switch2
+      interfaces: R1:eth0!R2:eth0!R_access:eth1!
+    - Switch3
+      interfaces: R_services:eth0!R1:eth1!R2:eth1!
+    - Switch4
+      interfaces: S_WEB_2:eth0!S_DNS:eth0!R_services:eth1!
+ 
+  consoles :
+    - all

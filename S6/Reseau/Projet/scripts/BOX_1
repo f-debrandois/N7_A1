@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Activer les interfaces
+ip link set dev eth0 up
+ip link set dev eth1 up
+
+# Configurer les interfaces
+ip addr add 192.168.144.1/25 dev eth0
+ip addr add 1.46.97.193/26 dev eth1
+
+# Activer le routage
+echo 1 >/proc/sys/net/ipv4/ip_forward
+
+# Route par défaut
+ip route add default via 1.46.97.196
+
+# Activer le service DHCP
+service isc-dhcp-server restart
+
+# Activer le SNAT
+iptables -t nat -A POSTROUTING -o eth1 -j SNAT --to-source 1.46.97.193
+
+# Refuser toutes les operations
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
+
+# Autoriser les pings
+iptables -t filter -A INPUT -p icmp -j ACCEPT
+iptables -t filter -A OUTPUT -p icmp -j ACCEPT
+iptables -t filter -A FORWARD -p icmp -j ACCEPT
+
+# Autoriser le protocole RIP
+iptables -A INPUT -p udp --dport 520 -j ACCEPT
+iptables -A OUTPUT -p udp --dport 520 -j ACCEPT
+iptables -A FORWARD -p udp --dport 520 -j ACCEPT
+
+# Autoriser le service DNS
+iptables -t filter -A FORWARD -d 1.46.97.20/26 -p udp --dport 53 -j ACCEPT
+iptables -t filter -A FORWARD -s 1.46.97.20/26 -p udp --sport 53 -j ACCEPT
+
+#Autoriser le service WEB
+iptables -t filter -A FORWARD -p tcp --dport 80 -j ACCEPT
+iptables -t filter -A FORWARD -p tcp --sport 80 -j ACCEPT
+iptables -t filter -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -t filter -A OUTPUT -p tcp --sport 80 -j ACCEPT
+
+# Activer le DNAT sur le serveur WEB
+iptables -t nat -A PREROUTING -p tcp -d 1.46.97.193 --dport 80 -j DNAT --to-destination 192.168.144.10
+

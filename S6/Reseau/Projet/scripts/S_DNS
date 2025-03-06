@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Activer les interfaces
+ip link set dev eth0 up
+
+# Configurer les interfaces
+ip addr add 1.46.97.20/26 dev eth0
+
+# Activer la passerelle par défaut
+ip route add default via 1.46.97.1
+
+# Activer le service DNS
+service bind9 restart
